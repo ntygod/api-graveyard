@@ -1,7 +1,11 @@
 (async function () {
   // ========== 加载数据 ==========
-  const resp = await fetch('data/apis.json');
-  const apis = await resp.json();
+  const [apisResp, endangeredResp] = await Promise.all([
+    fetch('data/apis.json'),
+    fetch('data/endangered.json')
+  ]);
+  const apis = await apisResp.json();
+  const endangered = await endangeredResp.json();
 
   // 从 localStorage 读取献花记录
   const flowerStore = JSON.parse(localStorage.getItem('api-graveyard-flowers') || '{}');
@@ -17,15 +21,23 @@
   const $graveyard = document.getElementById('graveyard');
   const $killerBoard = document.getElementById('killer-board');
   const $mostMourned = document.getElementById('most-mourned');
+  const $endangered = document.getElementById('endangered');
   const $stats = document.getElementById('stats');
   const $search = document.getElementById('search');
   const $sort = document.getElementById('sort');
   const $modalOverlay = document.getElementById('modal-overlay');
   const $modalContent = document.getElementById('modal-content');
   const $modalClose = document.getElementById('modal-close');
+  const $submitOverlay = document.getElementById('submit-overlay');
+  const $submitClose = document.getElementById('submit-close');
+  const $submitForm = document.getElementById('submit-form');
+  const $openSubmit = document.getElementById('open-submit');
   const filterBtns = document.querySelectorAll('.filter-btn');
 
   let currentView = 'all';
+
+  // GitHub 仓库地址（用户需要改成自己的）
+  const GITHUB_REPO = 'your-username/api-graveyard';
 
   // ========== 渲染统计 ==========
   function renderStats() {
@@ -35,6 +47,10 @@
       <div class="stat-item">
         <div class="stat-number">${apis.length}</div>
         <div class="stat-label">已故 API</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">${endangered.length}</div>
+        <div class="stat-label">濒危 API</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">${killers}</div>
@@ -125,8 +141,10 @@
     flowerStore[api.id] = (flowerStore[api.id] || 0) + 1;
     localStorage.setItem('api-graveyard-flowers', JSON.stringify(flowerStore));
 
-    btn.classList.add('flowered');
-    btn.querySelector('.flower-count').textContent = formatNumber(api.flowers);
+    if (btn) {
+      btn.classList.add('flowered');
+      btn.querySelector('.flower-count').textContent = formatNumber(api.flowers);
+    }
 
     // 飘花动画
     const flower = document.createElement('span');
@@ -207,9 +225,50 @@
     $mostMourned.appendChild(list);
   }
 
+  // ========== 濒危 API 区 ==========
+  function renderEndangered() {
+    const statusLabel = {
+      'deprecated': '已弃用',
+      'sunset-announced': '日落宣告',
+      'at-risk': '高风险'
+    };
+
+    $endangered.innerHTML = `
+      <div class="endangered-header">
+        <h2>⚠️ 濒危 API 观察名单</h2>
+        <p>这些 API 和服务还活着，但可能撑不了多久了</p>
+      </div>
+    `;
+
+    const sorted = [...endangered].sort((a, b) => b.severity - a.severity);
+
+    sorted.forEach((item, i) => {
+      const el = document.createElement('div');
+      el.className = `endangered-card severity-${item.severity}`;
+      el.style.animationDelay = `${i * 0.05}s`;
+      el.innerHTML = `
+        <div class="endangered-icon">${item.icon}</div>
+        <div class="endangered-info">
+          <div class="endangered-name">
+            ${item.name}
+            <span class="status-badge ${item.status}">${statusLabel[item.status] || item.status}</span>
+          </div>
+          <div class="endangered-reason">${item.reason}</div>
+          <div class="endangered-meta">
+            <span>⏰ 截止: ${item.deadline}</span>
+            <span class="endangered-alternative">➜ 替代: ${item.alternative}</span>
+          </div>
+          <div class="endangered-meta">
+            ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      `;
+      $endangered.appendChild(el);
+    });
+  }
+
   // ========== 弹窗 ==========
   function openModal(api) {
-    const hasFlowered = flowerStore[api.id] > 0;
     $modalContent.innerHTML = `
       <span class="modal-icon">${api.icon}</span>
       <div class="modal-name">${api.name}</div>
@@ -257,7 +316,6 @@
     document.getElementById('modal-flower-btn').addEventListener('click', (e) => {
       addFlower(api, null, e);
       document.getElementById('modal-flower-btn').innerHTML = `🌸 献花 (${formatNumber(api.flowers)})`;
-      // 同步更新列表中的按钮
       const listBtn = document.querySelector(`.flower-btn[data-id="${api.id}"]`);
       if (listBtn) {
         listBtn.querySelector('.flower-count').textContent = formatNumber(api.flowers);
@@ -279,6 +337,66 @@
 
   function closeModal() {
     $modalOverlay.classList.remove('active');
+  }
+
+  // ========== 提交表单 ==========
+  function openSubmitForm() {
+    $submitOverlay.classList.add('active');
+  }
+
+  function closeSubmitForm() {
+    $submitOverlay.classList.remove('active');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const fd = new FormData($submitForm);
+    const data = {
+      name: fd.get('name'),
+      icon: fd.get('icon') || '🪦',
+      born: fd.get('born'),
+      died: fd.get('died'),
+      killedBy: fd.get('killedBy'),
+      cause: fd.get('cause'),
+      lastWords: fd.get('lastWords') || '(无)',
+      epitaph: fd.get('epitaph'),
+      dependents: fd.get('dependents') || '(未知)',
+      tags: fd.get('tags') ? fd.get('tags').split(',').map(t => t.trim()).filter(Boolean) : []
+    };
+
+    // 生成 GitHub Issue 内容
+    const title = encodeURIComponent(`[讣告] ${data.name} (${data.born}-${data.died})`);
+    const body = encodeURIComponent(
+`## ${data.icon} ${data.name}
+
+- **出生**: ${data.born}
+- **死亡**: ${data.died}
+- **凶手**: ${data.killedBy}
+
+### 死因
+${data.cause}
+
+### 遗言
+${data.lastWords}
+
+### 墓志铭
+> ${data.epitaph}
+
+### 受影响者
+${data.dependents}
+
+### 标签
+${data.tags.join(', ')}
+
+---
+*通过 API 墓地提交表单自动生成*`
+    );
+
+    const issueUrl = `https://github.com/${GITHUB_REPO}/issues/new?title=${title}&body=${body}&labels=obituary`;
+    window.open(issueUrl, '_blank');
+    showToast('正在跳转到 GitHub，请登录后提交 Issue');
+    closeSubmitForm();
+    $submitForm.reset();
   }
 
   // ========== Toast ==========
@@ -316,9 +434,11 @@
     $graveyard.classList.toggle('hidden', view !== 'all');
     $killerBoard.classList.toggle('hidden', view !== 'killer');
     $mostMourned.classList.toggle('hidden', view !== 'most-mourned');
+    $endangered.classList.toggle('hidden', view !== 'endangered');
 
     if (view === 'killer') renderKillerBoard();
     if (view === 'most-mourned') renderMostMourned();
+    if (view === 'endangered') renderEndangered();
   }
 
   // ========== 事件绑定 ==========
@@ -328,8 +448,23 @@
   $modalOverlay.addEventListener('click', (e) => {
     if (e.target === $modalOverlay) closeModal();
   });
+
+  // 提交表单事件
+  $openSubmit.addEventListener('click', (e) => {
+    e.preventDefault();
+    openSubmitForm();
+  });
+  $submitClose.addEventListener('click', closeSubmitForm);
+  $submitOverlay.addEventListener('click', (e) => {
+    if (e.target === $submitOverlay) closeSubmitForm();
+  });
+  $submitForm.addEventListener('submit', handleSubmit);
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') {
+      closeModal();
+      closeSubmitForm();
+    }
   });
 
   filterBtns.forEach(btn => {

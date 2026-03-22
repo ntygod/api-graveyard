@@ -11,8 +11,10 @@
 ### 功能
 
 - 🪦 **墓碑卡片** — 浏览 24+ 个已故 API 的详细信息
-- 🌸 **献花** — 为你怀念的 API 献上一束花（数据保存在本地）
+- 🌸 **献花** — 为你怀念的 API 献上一束花（本地 + 社区合并）
 - ☠ **杀手排行榜** — 看看哪家公司杀死的 API 最多
+- ⚠️ **濒危 API 观察名单** — 那些还活着但可能撑不了多久的 API
+- 📝 **提交讣告** — 通过表单提交新的已故 API（自动生成 GitHub Issue）
 - 🔍 **搜索与排序** — 按名称、公司、标签搜索
 - 📋 **分享** — 一键复制墓碑信息到剪贴板
 - 📱 **响应式** — 支持移动端浏览
@@ -35,19 +37,27 @@ npx serve .
 
 ```
 api-graveyard/
-├── index.html          # 主页面
+├── index.html              # 主页面
 ├── css/
-│   └── style.css       # 样式
+│   └── style.css           # 样式
 ├── js/
-│   └── app.js          # 核心逻辑
+│   └── app.js              # 核心逻辑
 ├── data/
-│   └── apis.json       # API 数据
+│   ├── apis.json           # 已故 API 数据
+│   └── endangered.json     # 濒危 API 数据
+├── .github/
+│   └── workflows/
+│       └── merge-flowers.yml  # 社区献花合并
 └── README.md
 ```
 
 ## 贡献数据
 
-知道某个已经死去的 API？欢迎提交 PR！
+### 方式一：通过网站提交
+
+点击页面底部的「提交讣告」链接，填写表单后会自动跳转到 GitHub Issues 页面。
+
+### 方式二：直接提交 PR
 
 在 `data/apis.json` 中添加一条记录：
 
