@@ -150,6 +150,20 @@
       });
       $graveyard.appendChild(el);
     });
+    observeTombstones();
+  }
+
+  // ========== 滚动触发入场 ==========
+  function observeTombstones() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.tombstone').forEach(el => observer.observe(el));
   }
 
   // ========== 排序 ==========
@@ -196,6 +210,20 @@
     flower.style.top = event.clientY + 'px';
     document.body.appendChild(flower);
     setTimeout(() => flower.remove(), 1500);
+    // 爆发效果：额外 3-4 朵花随机方向飘散
+    const emojis = ['🌸', '🌺', '🌷', '💐', '🌹', '✨'];
+    for (let i = 0; i < 4; i++) {
+      const burst = document.createElement('span');
+      burst.className = 'flower-burst';
+      burst.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      burst.style.left = event.clientX + 'px';
+      burst.style.top = event.clientY + 'px';
+      burst.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+      burst.style.setProperty('--dy', (Math.random() * -100 - 30) + 'px');
+      burst.style.setProperty('--rot', (Math.random() * 360 - 180) + 'deg');
+      document.body.appendChild(burst);
+      setTimeout(() => burst.remove(), 1200);
+    }
     renderStats();
   }
 
@@ -484,8 +512,45 @@
   $backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   window.addEventListener('hashchange', handleRoute);
 
+  // ========== 粒子效果 ==========
+  function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 15; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+      container.appendChild(p);
+    }
+  }
+
+  // ========== 统计计数动画 ==========
+  function animateCountUp() {
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const text = el.textContent;
+      const match = text.match(/^([\d.]+)([wk]?)$/);
+      if (!match) return;
+      const target = parseFloat(match[1]);
+      const suffix = match[2];
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const current = suffix ? (target * eased).toFixed(1) : Math.round(target * eased);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
   // ========== 初始化 ==========
   applyLang();
   renderStats();
   handleRoute();
+  createParticles();
+  animateCountUp();
 })();
