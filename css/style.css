@@ -21,6 +21,7 @@
   --flower-color: #d4456a;
   --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
 }
 
 html {
@@ -85,23 +86,84 @@ header {
   z-index: 1;
   text-align: center;
   padding: 60px 20px 30px;
+  overflow: hidden;
+}
+
+.graveyard-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.scene-svg {
+  width: 100%;
+  height: 100%;
 }
 
 header h1 {
+  font-family: var(--font-serif);
   font-size: 3rem;
   color: var(--text-bright);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 4px;
-  text-transform: uppercase;
   margin-bottom: 12px;
   text-shadow: 0 0 40px rgba(124, 111, 155, 0.3);
+  position: relative;
 }
 
 .subtitle {
   color: var(--text-dim);
   font-size: 1.1rem;
   font-weight: 300;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+/* ========== 随机墓志铭 ========== */
+.random-epitaph {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-glow);
+  font-size: 1rem;
   margin-bottom: 20px;
+  cursor: pointer;
+  transition: opacity 0.5s;
+  min-height: 1.5em;
+  position: relative;
+  opacity: 0.8;
+}
+
+.random-epitaph:hover {
+  opacity: 1;
+}
+
+.random-epitaph .epitaph-source {
+  color: var(--text-dim);
+  font-style: normal;
+  font-family: var(--font);
+  font-size: 0.8rem;
+}
+
+/* ========== 忌日横幅 ========== */
+.memorial-banner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, transparent, rgba(124, 111, 155, 0.15), transparent);
+  color: var(--accent-glow);
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(124, 111, 155, 0.1);
+  animation: fadeInUp 1s ease;
+}
+
+.memorial-banner a {
+  color: var(--accent-glow);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .stats {
@@ -226,8 +288,8 @@ main {
 .tombstone {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 16px 16px 4px 4px;
-  padding: 28px 24px 20px;
+  border-radius: 40px 40px 4px 4px;
+  padding: 32px 24px 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -279,6 +341,7 @@ main {
 }
 
 .tombstone-epitaph {
+  font-family: var(--font-serif);
   font-style: italic;
   color: var(--text);
   font-size: 0.9rem;
@@ -1440,4 +1503,76 @@ main > section:not(.hidden) {
 /* ========== 统计数字动画辅助 ========== */
 .stat-number {
   display: inline-block;
+}
+
+/* ========== 地面渐变 ========== */
+footer {
+  background: linear-gradient(to bottom, var(--bg), #12101a 30%, #1a1520 60%, #201a28);
+  border-top: none;
+}
+
+/* ========== 弹窗墓志铭字体 ========== */
+.modal-epitaph {
+  font-family: var(--font-serif);
+}
+
+/* ========== 时间线墓志铭字体 ========== */
+.timeline-card-epitaph {
+  font-family: var(--font-serif);
+}
+
+/* ========== 忌日高亮墓碑 ========== */
+.tombstone.memorial {
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 20px rgba(155, 143, 196, 0.15);
+}
+
+.tombstone.memorial::before {
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+}
+
+/* ========== 花雨动画 ========== */
+.flower-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.flower-rain .rain-drop {
+  position: absolute;
+  top: -40px;
+  font-size: 1.5rem;
+  animation: rainFall linear forwards;
+  opacity: 0.9;
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* ========== 濒危倒计时 ========== */
+.countdown {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #e74c3c;
+  margin-top: 6px;
+  animation: countdownPulse 2s ease-in-out infinite;
+}
+
+@keyframes countdownPulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
 }

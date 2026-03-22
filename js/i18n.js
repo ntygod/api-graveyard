@@ -89,6 +89,11 @@ const I18N = {
     backToTop: '返回顶部',
     // Lang
     langLabel: '🇨🇳 中文',
+    // 新增趣味文案
+    randomEpitaphTip: '点击换一条',
+    memorialBanner: (name, years) => `🕯️ 今天是 ${name} 的 ${years} 周年忌日`,
+    daysUntilDeath: (days) => `⏳ 距离死亡还有 ${days} 天`,
+    flowerRainToast: '🌸 触发花雨！感谢你的深情厚谊！',
   },
   en: {
     title: '🪦 API Graveyard',
@@ -163,5 +168,9 @@ const I18N = {
     shareTemplate: (api) => `🪦 R.I.P. ${api.name} (${api.born}-${api.died})\n\n"${api.epitaph}"\n\nCause: ${api.cause}\nKilled by: ${api.killedBy}\n\n#APIGraveyard #RIP\nhttps://ntygod.github.io/api-graveyard/#/api/${api.id}`,
     backToTop: 'Back to top',
     langLabel: '🇬🇧 EN',
+    randomEpitaphTip: 'Click for another',
+    memorialBanner: (name, years) => `🕯️ Today marks the ${years}-year anniversary of ${name}'s death`,
+    daysUntilDeath: (days) => `⏳ ${days} days until death`,
+    flowerRainToast: '🌸 Flower rain triggered! Thanks for your devotion!',
   }
 };

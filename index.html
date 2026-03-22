@@ -19,6 +19,8 @@
   <meta name="twitter:description" content="40+ tombstones for dead APIs. Leave flowers, killer ranking, endangered watchlist.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪦</text></svg>">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="fog"></div>
@@ -27,9 +29,31 @@
   <!-- 语言切换 -->
   <button class="lang-switch" id="lang-switch" title="Switch Language">🇨🇳/🇬🇧</button>
 
+  <!-- 忌日横幅 -->
+  <div class="memorial-banner hidden" id="memorial-banner"></div>
+
   <header>
+    <!-- 墓园剪影 -->
+    <div class="graveyard-scene">
+      <svg viewBox="0 0 1200 200" preserveAspectRatio="none" class="scene-svg">
+        <circle cx="1050" cy="50" r="30" fill="rgba(200,200,210,0.08)"/>
+        <circle cx="1050" cy="50" r="25" fill="#0a0a0f"/>
+        <!-- 枯树 -->
+        <path d="M150 200 L150 100 L130 60 L150 80 L145 40 L155 70 L170 50 L150 90 L150 200" fill="rgba(100,90,120,0.15)"/>
+        <path d="M1080 200 L1080 120 L1060 80 L1080 100 L1075 60 L1085 90 L1100 70 L1080 110 L1080 200" fill="rgba(100,90,120,0.1)"/>
+        <!-- 十字架 -->
+        <rect x="350" y="130" width="6" height="70" rx="1" fill="rgba(100,90,120,0.12)"/>
+        <rect x="340" y="145" width="26" height="5" rx="1" fill="rgba(100,90,120,0.12)"/>
+        <rect x="850" y="140" width="5" height="60" rx="1" fill="rgba(100,90,120,0.08)"/>
+        <rect x="842" y="152" width="20" height="4" rx="1" fill="rgba(100,90,120,0.08)"/>
+        <!-- 地面线 -->
+        <path d="M0 195 Q300 185 600 192 Q900 198 1200 190 L1200 200 L0 200Z" fill="rgba(60,50,70,0.15)"/>
+      </svg>
+    </div>
     <h1 id="h-title"></h1>
     <p class="subtitle" id="h-subtitle"></p>
+    <!-- 随机墓志铭 -->
+    <div class="random-epitaph" id="random-epitaph"></div>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -134,6 +158,9 @@
       </form>
     </div>
   </div>
+
+  <!-- 花雨容器 -->
+  <div class="flower-rain hidden" id="flower-rain"></div>
 
   <footer>
     <p><span id="footer-text"></span><a href="#" id="open-submit"></a></p>

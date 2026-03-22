@@ -192,6 +192,9 @@
   }
 
   // ========== 献花 ==========
+  let flowerCombo = 0;
+  let flowerComboTimer = null;
+
   function addFlower(api, btn, event) {
     api.flowers++;
     flowerStore[api.id] = (flowerStore[api.id] || 0) + 1;
@@ -210,7 +213,7 @@
     flower.style.top = event.clientY + 'px';
     document.body.appendChild(flower);
     setTimeout(() => flower.remove(), 1500);
-    // 爆发效果：额外 3-4 朵花随机方向飘散
+    // 爆发效果
     const emojis = ['🌸', '🌺', '🌷', '💐', '🌹', '✨'];
     for (let i = 0; i < 4; i++) {
       const burst = document.createElement('span');
@@ -223,6 +226,15 @@
       burst.style.setProperty('--rot', (Math.random() * 360 - 180) + 'deg');
       document.body.appendChild(burst);
       setTimeout(() => burst.remove(), 1200);
+    }
+    // 连击彩蛋
+    flowerCombo++;
+    clearTimeout(flowerComboTimer);
+    flowerComboTimer = setTimeout(() => { flowerCombo = 0; }, 3000);
+    if (flowerCombo >= 10) {
+      flowerCombo = 0;
+      triggerFlowerRain();
+      showToast(t.flowerRainToast);
     }
     renderStats();
   }
@@ -299,6 +311,7 @@
             <span>${t.deadlineLabel} ${item.deadline}</span>
             <span class="endangered-alternative">${t.alternativeLabel} ${item.alternative}</span>
           </div>
+          ${item._countdown ? `<div class="countdown">${t.daysUntilDeath(item._countdown)}</div>` : ''}
           <div class="endangered-meta">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
         </div>
       `;
@@ -547,10 +560,90 @@
     });
   }
 
+  // ========== 随机墓志铭 ==========
+  const $randomEpitaph = document.getElementById('random-epitaph');
+  function showRandomEpitaph() {
+    const api = apis[Math.floor(Math.random() * apis.length)];
+    const diedYear = api.died.substring(0, 4);
+    $randomEpitaph.style.opacity = '0';
+    setTimeout(() => {
+      $randomEpitaph.innerHTML = `"${api.epitaph}" <span class="epitaph-source">— ${api.name}, ${diedYear}</span>`;
+      $randomEpitaph.style.opacity = '0.8';
+    }, 300);
+  }
+  $randomEpitaph.addEventListener('click', showRandomEpitaph);
+  $randomEpitaph.title = t.randomEpitaphTip;
+
+  // ========== 今日忌日 ==========
+  function checkMemorial() {
+    const today = new Date();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const todayMD = `-${mm}-${dd}`;
+
+    const memorials = apis.filter(api => api.died.endsWith(todayMD));
+    if (memorials.length > 0) {
+      const $banner = document.getElementById('memorial-banner');
+      const lines = memorials.map(api => {
+        const diedYear = parseInt(api.died.substring(0, 4));
+        const years = today.getFullYear() - diedYear;
+        return t.memorialBanner(api.name, years);
+      });
+      $banner.innerHTML = lines.join(' · ');
+      $banner.classList.remove('hidden');
+      // 标记对应墓碑
+      memorials.forEach(api => {
+        setTimeout(() => {
+          const card = document.querySelector(`.flower-btn[data-id="${api.id}"]`);
+          if (card) card.closest('.tombstone')?.classList.add('memorial');
+        }, 500);
+      });
+    }
+  }
+
+  // ========== 濒危倒计时 ==========
+  function addCountdowns() {
+    const now = new Date();
+    endangered.forEach(item => {
+      if (!item.deadline || item.deadline.length < 7) return;
+      const deadline = new Date(item.deadline);
+      if (isNaN(deadline.getTime())) return;
+      const days = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+      if (days > 0) {
+        item._countdown = days;
+      }
+    });
+  }
+
+  // ========== 花雨彩蛋 ==========
+  function triggerFlowerRain() {
+    const $rain = document.getElementById('flower-rain');
+    $rain.classList.remove('hidden');
+    $rain.innerHTML = '';
+    const emojis = ['🌸', '🌺', '🌷', '💐', '🌹', '✨', '🌻', '💮'];
+    for (let i = 0; i < 35; i++) {
+      const drop = document.createElement('span');
+      drop.className = 'rain-drop';
+      drop.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      drop.style.left = Math.random() * 100 + '%';
+      drop.style.animationDuration = (2 + Math.random() * 3) + 's';
+      drop.style.animationDelay = (Math.random() * 1.5) + 's';
+      drop.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+      $rain.appendChild(drop);
+    }
+    setTimeout(() => {
+      $rain.classList.add('hidden');
+      $rain.innerHTML = '';
+    }, 5000);
+  }
+
   // ========== 初始化 ==========
   applyLang();
   renderStats();
   handleRoute();
   createParticles();
   animateCountUp();
+  showRandomEpitaph();
+  checkMemorial();
+  addCountdowns();
 })();
