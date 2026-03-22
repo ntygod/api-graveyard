@@ -8,7 +8,8 @@
   const endangered = await endangeredResp.json();
 
   // 从 localStorage 读取献花记录
-  const flowerStore = JSON.parse(localStorage.getItem('api-graveyard-flowers') || '{}');
+  const FLOWER_KEY = 'api-graveyard-flowers-v2';
+  const flowerStore = JSON.parse(localStorage.getItem(FLOWER_KEY) || '{}');
 
   // 合并本地献花数
   apis.forEach(api => {
@@ -148,7 +149,7 @@
   function addFlower(api, btn, event) {
     api.flowers++;
     flowerStore[api.id] = (flowerStore[api.id] || 0) + 1;
-    localStorage.setItem('api-graveyard-flowers', JSON.stringify(flowerStore));
+    localStorage.setItem(FLOWER_KEY, JSON.stringify(flowerStore));
 
     if (btn) {
       btn.classList.add('flowered');
