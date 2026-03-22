@@ -57,6 +57,28 @@ body {
   100% { opacity: 1; transform: translateX(10px); }
 }
 
+/* ========== 语言切换按钮 ========== */
+.lang-switch {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lang-switch:hover {
+  border-color: var(--accent);
+  color: var(--text-bright);
+  background: var(--bg-card-hover);
+}
+
 /* ========== Header ========== */
 header {
   position: relative;

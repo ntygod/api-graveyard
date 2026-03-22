@@ -1,0 +1,702 @@
+[
+  {
+    "id": "google-reader",
+    "name": "Google Reader API",
+    "born": "2005",
+    "died": "2013-07-01",
+    "icon": "📖",
+    "cause": "Google believed users were declining, despite massive protests from loyal users",
+    "lastWords": "We know Reader has a devoted following who will be very sad to see it go.",
+    "epitaph": "RSS never dies, but I'll go first",
+    "killedBy": "Google",
+    "dependents": "Feedly, Reeder, countless RSS clients forced to migrate",
+    "tags": [
+      "google",
+      "rss",
+      "classic"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-plus",
+    "name": "Google+ API",
+    "born": "2011",
+    "died": "2019-04-02",
+    "icon": "🔴",
+    "cause": "User data breach + almost nobody used it",
+    "lastWords": "We are shutting down Google+ for consumer accounts.",
+    "epitaph": "I tried. I really tried.",
+    "killedBy": "Google",
+    "dependents": "Google+ login integrations, social share buttons",
+    "tags": [
+      "google",
+      "social"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "parse",
+    "name": "Parse API",
+    "born": "2011",
+    "died": "2017-01-28",
+    "icon": "☁️",
+    "cause": "Facebook acquired it, decided it wasn't profitable, shut it down",
+    "lastWords": "We're winding down the Parse service.",
+    "epitaph": "BaaS pioneer, killed by corporate indifference",
+    "killedBy": "Facebook",
+    "dependents": "Tens of thousands of mobile app backends",
+    "tags": [
+      "facebook",
+      "baas",
+      "mobile"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "vine",
+    "name": "Vine API",
+    "born": "2013",
+    "died": "2017-01-17",
+    "icon": "🌿",
+    "cause": "Twitter couldn't figure out monetization, just killed it",
+    "lastWords": "Nothing is going away just yet.",
+    "epitaph": "6 seconds changed the world, then the world forgot me",
+    "killedBy": "Twitter",
+    "dependents": "Countless short video creators, third-party clients",
+    "tags": [
+      "twitter",
+      "video",
+      "social"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-hangouts",
+    "name": "Google Hangouts API",
+    "born": "2013",
+    "died": "2022-11-01",
+    "icon": "💬",
+    "cause": "Replaced by Google Chat and Google Meet",
+    "lastWords": "Hangouts users will be upgraded to Google Chat.",
+    "epitaph": "Google's Nth chat app. Won't be the last.",
+    "killedBy": "Google",
+    "dependents": "Enterprise integrations, chatbots",
+    "tags": [
+      "google",
+      "messaging"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "flickr-original",
+    "name": "Flickr 免费存储 API",
+    "born": "2004",
+    "died": "2019-02-05",
+    "icon": "📸",
+    "cause": "SmugMug acquired it, cut free 1TB storage to 1,000 photos",
+    "lastWords": "Free members will be limited to 1,000 photos.",
+    "epitaph": "Once the king of photos, lost to the times",
+    "killedBy": "SmugMug",
+    "dependents": "Photography communities, third-party album apps",
+    "tags": [
+      "photography",
+      "storage"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "yahoo-pipes",
+    "name": "Yahoo Pipes",
+    "born": "2007",
+    "died": "2015-09-30",
+    "icon": "🔧",
+    "cause": "Yahoo mass layoffs, Pipes deemed non-core",
+    "lastWords": "We will be shutting down Pipes on September 30, 2015.",
+    "epitaph": "Visual programming pioneer, born too early",
+    "killedBy": "Yahoo",
+    "dependents": "Data aggregation workflows, RSS mashup apps",
+    "tags": [
+      "yahoo",
+      "data",
+      "pioneer"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-url-shortener",
+    "name": "goo.gl URL Shortener API",
+    "born": "2009",
+    "died": "2019-03-30",
+    "icon": "🔗",
+    "cause": "Replaced by Firebase Dynamic Links (which also died later)",
+    "lastWords": "Starting March 30, 2019, we will be turning down support.",
+    "epitaph": "Short link, short life",
+    "killedBy": "Google",
+    "dependents": "Countless apps' URL shortening features",
+    "tags": [
+      "google",
+      "tools"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "firebase-dynamic-links",
+    "name": "Firebase Dynamic Links",
+    "born": "2016",
+    "died": "2025-08-25",
+    "icon": "🔥",
+    "cause": "Google decided maintenance cost was too high",
+    "lastWords": "Firebase Dynamic Links is deprecated and should be migrated away from.",
+    "epitaph": "Killed goo.gl, then died itself. Ironic.",
+    "killedBy": "Google",
+    "dependents": "Mobile deep linking, marketing tracking",
+    "tags": [
+      "google",
+      "firebase",
+      "mobile"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "heroku-free",
+    "name": "Heroku Free Tier",
+    "born": "2007",
+    "died": "2022-11-28",
+    "icon": "💜",
+    "cause": "Salesforce wanted to make money. Free tier gone.",
+    "lastWords": "Starting November 28, 2022, free Heroku Dynos will no longer be available.",
+    "epitaph": "A generation's first deploy platform, killed by monetization",
+    "killedBy": "Salesforce",
+    "dependents": "Countless student projects, personal projects, small startups",
+    "tags": [
+      "paas",
+      "free",
+      "classic"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "twitter-api-free",
+    "name": "Twitter API (免费版)",
+    "born": "2006",
+    "died": "2023-02-09",
+    "icon": "🐦",
+    "cause": "Elon Musk acquired Twitter, made free API nearly unusable",
+    "lastWords": "Starting February 9, we will no longer support free access to the Twitter API.",
+    "epitaph": "The gold standard of open ecosystems, killed by new owner's greed",
+    "killedBy": "Elon Musk / X Corp",
+    "dependents": "Tweetbot, thousands of bots, academic research, data analysis tools",
+    "tags": [
+      "twitter",
+      "social",
+      "classic"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-stadia",
+    "name": "Stadia API / 平台",
+    "born": "2019",
+    "died": "2023-01-18",
+    "icon": "🎮",
+    "cause": "Gamers didn't buy in, Google lost patience",
+    "lastWords": "We will be winding down Stadia over the coming months.",
+    "epitaph": "The future of cloud gaming - just not my future",
+    "killedBy": "Google",
+    "dependents": "Game developers, Stadia exclusive games",
+    "tags": [
+      "google",
+      "gaming"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "yahoo-weather",
+    "name": "Yahoo Weather API (免费版)",
+    "born": "2005",
+    "died": "2019-01-03",
+    "icon": "🌤️",
+    "cause": "Yahoo shut down free weather API access",
+    "lastWords": "The API is no longer available for free use.",
+    "epitaph": "Weather forecasts aren't free anymore, but weather still is",
+    "killedBy": "Yahoo / Verizon",
+    "dependents": "Weather apps, smart home integrations",
+    "tags": [
+      "yahoo",
+      "weather",
+      "free"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-inbox",
+    "name": "Inbox by Gmail API",
+    "born": "2014",
+    "died": "2019-04-02",
+    "icon": "📧",
+    "cause": "Features merged into Gmail, Inbox shut down",
+    "lastWords": "We're saying goodbye to Inbox by Gmail.",
+    "epitaph": "Better than Gmail, so it had to die",
+    "killedBy": "Google",
+    "dependents": "Inbox users, email automation tools",
+    "tags": [
+      "google",
+      "email"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "microsoft-codespaces-old",
+    "name": "Visual Studio Codespaces",
+    "born": "2019",
+    "died": "2021-02-17",
+    "icon": "💻",
+    "cause": "Consolidated into GitHub Codespaces",
+    "lastWords": "Visual Studio Codespaces is being consolidated into GitHub Codespaces.",
+    "epitaph": "Name stolen, soul stolen",
+    "killedBy": "Microsoft / GitHub",
+    "dependents": "VS Codespaces users",
+    "tags": [
+      "microsoft",
+      "dev-tools"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-allo",
+    "name": "Google Allo",
+    "born": "2016",
+    "died": "2019-03-12",
+    "icon": "💭",
+    "cause": "Nobody used it. Google made another chat app and abandoned it again.",
+    "lastWords": "We're pausing investment in Allo.",
+    "epitaph": "Google chat app graveyard +1",
+    "killedBy": "Google",
+    "dependents": "Almost none, because almost nobody used it",
+    "tags": [
+      "google",
+      "messaging"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "fabric-crashlytics-legacy",
+    "name": "Fabric / Crashlytics (独立版)",
+    "born": "2011",
+    "died": "2020-03-31",
+    "icon": "🧵",
+    "cause": "Google acquired it and merged into Firebase",
+    "lastWords": "Fabric is being sunset. Please migrate to Firebase.",
+    "epitaph": "Being acquired is just another way to die",
+    "killedBy": "Google / Firebase",
+    "dependents": "Hundreds of thousands of mobile apps' crash monitoring",
+    "tags": [
+      "google",
+      "mobile",
+      "monitoring"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "mlab",
+    "name": "mLab (免费 MongoDB 托管)",
+    "born": "2011",
+    "died": "2020-12-09",
+    "icon": "🍃",
+    "cause": "Acquired by MongoDB Atlas and merged",
+    "lastWords": "All mLab accounts have been migrated to MongoDB Atlas.",
+    "epitaph": "Synonymous with free MongoDB, died by acquisition",
+    "killedBy": "MongoDB Inc.",
+    "dependents": "Countless student projects and prototype apps",
+    "tags": [
+      "database",
+      "free",
+      "mongodb"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-cloud-print",
+    "name": "Google Cloud Print",
+    "born": "2010",
+    "died": "2020-12-31",
+    "icon": "🖨️",
+    "cause": "Chrome OS got native printing support, Cloud Print became useless",
+    "lastWords": "Google Cloud Print will no longer be supported as of December 31, 2020.",
+    "epitaph": "Cloud printing sounds cool, but nobody cared",
+    "killedBy": "Google",
+    "dependents": "Chromebook users, enterprise printing solutions",
+    "tags": [
+      "google",
+      "hardware"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "internet-explorer",
+    "name": "Internet Explorer",
+    "born": "1995",
+    "died": "2022-06-15",
+    "icon": "🌐",
+    "cause": "Replaced by Edge, Microsoft finally let go",
+    "lastWords": "Internet Explorer 11 has retired and is officially out of support.",
+    "epitaph": "Not the best browser, but the best tool for downloading other browsers",
+    "killedBy": "Microsoft",
+    "dependents": "Countless enterprise intranet systems, ActiveX controls",
+    "tags": [
+      "microsoft",
+      "browser",
+      "classic"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "bintray-jcenter",
+    "name": "Bintray / JCenter",
+    "born": "2013",
+    "died": "2021-05-01",
+    "icon": "📦",
+    "cause": "JFrog decided to shut down free services",
+    "lastWords": "The Bintray, JCenter, GoCenter, and ChartCenter services will be sunset.",
+    "epitaph": "Half the Android ecosystem depended on me, then I vanished",
+    "killedBy": "JFrog",
+    "dependents": "Nearly all Android projects, Java libraries",
+    "tags": [
+      "java",
+      "android",
+      "package-manager"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-domains",
+    "name": "Google Domains",
+    "born": "2015",
+    "died": "2023-09-07",
+    "icon": "🌍",
+    "cause": "Google sold its domain business to Squarespace",
+    "lastWords": "We've entered into an agreement with Squarespace.",
+    "epitaph": "Can't even keep a domain business running. Impressive.",
+    "killedBy": "Google",
+    "dependents": "10M+ domain holders",
+    "tags": [
+      "google",
+      "domain"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "itunes-xml",
+    "name": "iTunes XML Library API",
+    "born": "2001",
+    "died": "2019",
+    "icon": "🎵",
+    "cause": "macOS Catalina replaced iTunes with Music.app",
+    "lastWords": "iTunes is being replaced by dedicated apps.",
+    "epitaph": "End of an era. 1,000 songs in your pocket, now in the cloud.",
+    "killedBy": "Apple",
+    "dependents": "DJ software, music management tools, playlist sync",
+    "tags": [
+      "apple",
+      "music"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "openai-codex-api",
+    "name": "OpenAI Codex API (独立版)",
+    "born": "2021",
+    "died": "2023-03-23",
+    "icon": "🤖",
+    "cause": "Merged into GPT-3.5/GPT-4, no longer offered separately",
+    "lastWords": "Codex models are now deprecated.",
+    "epitaph": "The dawn of AI coding, replaced by its own descendants",
+    "killedBy": "OpenAI",
+    "dependents": "Early GitHub Copilot, code generation tools",
+    "tags": [
+      "ai",
+      "coding"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "flash-actionscript",
+    "name": "Adobe Flash / ActionScript",
+    "born": "1996",
+    "died": "2020-12-31",
+    "icon": "⚡",
+    "cause": "Too many security vulnerabilities, HTML5 replaced it, browsers united to block it",
+    "lastWords": "Adobe will no longer be supporting Flash Player after December 31, 2020.",
+    "epitaph": "The entire internet's childhood, killed by progress",
+    "killedBy": "Adobe / 浏览器联盟",
+    "dependents": "Countless Flash games, animation sites, video players",
+    "tags": [
+      "adobe",
+      "browser",
+      "classic"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "picasa-api",
+    "name": "Picasa Web Albums API",
+    "born": "2004",
+    "died": "2016-05-01",
+    "icon": "🖼️",
+    "cause": "Replaced by Google Photos",
+    "lastWords": "We're retiring Picasa to focus on Google Photos.",
+    "epitaph": "Once the best photo manager, killed by its own sibling",
+    "killedBy": "Google",
+    "dependents": "Picasa desktop users, third-party album integrations",
+    "tags": [
+      "google",
+      "photography"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "windows-phone",
+    "name": "Windows Phone API / 平台",
+    "born": "2010",
+    "died": "2019-12-10",
+    "icon": "📱",
+    "cause": "Market share too low, developers wouldn't build for it, vicious cycle",
+    "lastWords": "Windows 10 Mobile has reached end of support.",
+    "epitaph": "Live Tiles were beautiful, but nobody was buying",
+    "killedBy": "Microsoft",
+    "dependents": "Windows Phone app developers, Nokia Lumia users",
+    "tags": [
+      "microsoft",
+      "mobile"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-translate-free",
+    "name": "Google Translate API (免费版)",
+    "born": "2008",
+    "died": "2012-12-01",
+    "icon": "🌐",
+    "cause": "Too much abuse, Google switched to paid API",
+    "lastWords": "The Google Translate API has been officially deprecated.",
+    "epitaph": "The golden age of free translation, gone forever",
+    "killedBy": "Google",
+    "dependents": "Countless translation plugins, multilingual websites",
+    "tags": [
+      "google",
+      "translation",
+      "free"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "hipchat",
+    "name": "HipChat API",
+    "born": "2010",
+    "died": "2019-02-15",
+    "icon": "💬",
+    "cause": "Atlassian acquired it, failed to compete with Slack, pivoted to Stride which also failed",
+    "lastWords": "We will be ending HipChat and Stride services.",
+    "epitaph": "Acquired twice, died twice",
+    "killedBy": "Atlassian",
+    "dependents": "Enterprise chat integrations, DevOps notification bots",
+    "tags": [
+      "atlassian",
+      "messaging"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "yahoo-directory",
+    "name": "Yahoo Directory",
+    "born": "1994",
+    "died": "2014-12-31",
+    "icon": "📂",
+    "cause": "Search engines made manual directory categorization pointless",
+    "lastWords": "Yahoo Directory will be retired at the end of 2014.",
+    "epitaph": "The internet's first Yellow Pages, killed by search engines",
+    "killedBy": "Yahoo",
+    "dependents": "Early internet users, SEO practitioners",
+    "tags": [
+      "yahoo",
+      "search",
+      "pioneer"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "delicious-api",
+    "name": "Delicious API",
+    "born": "2003",
+    "died": "2017-06-15",
+    "icon": "🔖",
+    "cause": "Changed hands multiple times, finally shut down",
+    "lastWords": "Delicious will be shutting down.",
+    "epitaph": "The OG of social bookmarking, died with no one to take over",
+    "killedBy": "多次转手",
+    "dependents": "Bookmark management tools, social sharing apps",
+    "tags": [
+      "social",
+      "bookmarks",
+      "pioneer"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "cortana-skills",
+    "name": "Cortana Skills Kit / API",
+    "born": "2017",
+    "died": "2021-09-07",
+    "icon": "🎙️",
+    "cause": "Microsoft abandoned consumer Cortana, pivoted to enterprise",
+    "lastWords": "Cortana in Windows is being deprecated.",
+    "epitaph": "Hey Cortana... Goodbye Cortana",
+    "killedBy": "Microsoft",
+    "dependents": "Cortana skill developers, smart home integrations",
+    "tags": [
+      "microsoft",
+      "ai",
+      "voice"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "amazon-drive-api",
+    "name": "Amazon Drive API",
+    "born": "2011",
+    "died": "2023-12-31",
+    "icon": "📦",
+    "cause": "Amazon closed third-party API access, then killed the whole service",
+    "lastWords": "Amazon Drive is being discontinued.",
+    "epitaph": "Even Amazon didn't want to run a cloud drive",
+    "killedBy": "Amazon",
+    "dependents": "Third-party backup tools, file sync apps",
+    "tags": [
+      "amazon",
+      "storage"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "bitbucket-mercurial",
+    "name": "Bitbucket Mercurial 支持",
+    "born": "2008",
+    "died": "2020-07-01",
+    "icon": "🪣",
+    "cause": "Git won the version control war, too few Mercurial users",
+    "lastWords": "We will be sunsetting Mercurial support on Bitbucket.",
+    "epitaph": "Git vs Mercurial - winner takes all",
+    "killedBy": "Atlassian",
+    "dependents": "Mercurial projects, Python community (CPython used Hg)",
+    "tags": [
+      "atlassian",
+      "vcs"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "windows-gadgets",
+    "name": "Windows Desktop Gadgets API",
+    "born": "2007",
+    "died": "2012",
+    "icon": "🔲",
+    "cause": "Severe security vulnerabilities, Microsoft killed the entire feature",
+    "lastWords": "Gadgets have been discontinued due to serious vulnerabilities.",
+    "epitaph": "Desktop widget pioneer, killed by security flaws",
+    "killedBy": "Microsoft",
+    "dependents": "Windows Vista/7 desktop gadget developers",
+    "tags": [
+      "microsoft",
+      "desktop"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "foursquare-api-v2",
+    "name": "Foursquare API v2 (免费版)",
+    "born": "2009",
+    "died": "2023-03-14",
+    "icon": "📍",
+    "cause": "Foursquare pivoted to B2B, free API heavily restricted then closed",
+    "lastWords": "We're making changes to our developer offerings.",
+    "epitaph": "Creator of check-in culture, killed by its own pivot",
+    "killedBy": "Foursquare",
+    "dependents": "LBS apps, check-in social products",
+    "tags": [
+      "social",
+      "maps",
+      "free"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "ifttt-free",
+    "name": "IFTTT 免费无限 Applets",
+    "born": "2010",
+    "died": "2020-10-07",
+    "icon": "🔀",
+    "cause": "Free users went from unlimited Applets to only 3",
+    "lastWords": "We're introducing IFTTT Pro.",
+    "epitaph": "Democratized automation, killed by a paywall",
+    "killedBy": "IFTTT",
+    "dependents": "Smart home users, automation workflows",
+    "tags": [
+      "automation",
+      "free",
+      "iot"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "google-fit-rest",
+    "name": "Google Fit REST API",
+    "born": "2014",
+    "died": "2025-06-30",
+    "icon": "💪",
+    "cause": "Google replaced it with Health Connect, REST API deprecated",
+    "lastWords": "Google Fit APIs are deprecated. Migrate to Health Connect.",
+    "epitaph": "The dream of open health data, shattered again",
+    "killedBy": "Google",
+    "dependents": "Fitness apps, health data analysis tools",
+    "tags": [
+      "google",
+      "health",
+      "mobile"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "ubuntu-touch",
+    "name": "Ubuntu Touch / Unity API",
+    "born": "2013",
+    "died": "2017-04-05",
+    "icon": "🐧",
+    "cause": "Canonical abandoned phone/tablet plans, returned to server market",
+    "lastWords": "We will shift our default Ubuntu desktop back to GNOME.",
+    "epitaph": "The Linux phone dream - woke up",
+    "killedBy": "Canonical",
+    "dependents": "Ubuntu Phone developers, Unity desktop users",
+    "tags": [
+      "linux",
+      "mobile"
+    ],
+    "flowers": 0
+  },
+  {
+    "id": "tumblr-legacy-api",
+    "name": "Tumblr API v1",
+    "born": "2007",
+    "died": "2018",
+    "icon": "📝",
+    "cause": "Replaced by v2 and deprecated, Tumblr itself in decline",
+    "lastWords": "API v1 is no longer supported.",
+    "epitaph": "The rebellious teen of blog platforms, lost itself growing up",
+    "killedBy": "Tumblr / Yahoo / Verizon",
+    "dependents": "Tumblr third-party clients, blog migration tools",
+    "tags": [
+      "social",
+      "blog"
+    ],
+    "flowers": 0
+  }
+]

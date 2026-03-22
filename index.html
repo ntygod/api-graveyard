@@ -6,46 +6,50 @@
   <title>API 墓地 - R.I.P. 那些离我们而去的 API</title>
   <meta name="description" content="纪念那些曾经辉煌、如今已逝的 API 和服务。献一束花，缅怀它们。">
   <!-- Open Graph -->
-  <meta property="og:title" content="API 墓地 - R.I.P. 那些离我们而去的 API">
-  <meta property="og:description" content="40+ 个已故 API 的墓碑。献花、杀手排行榜、濒危观察名单。来缅怀那些改变过世界的 API。">
+  <meta property="og:title" content="API Graveyard - R.I.P. APIs We Lost">
+  <meta property="og:description" content="40+ tombstones for dead APIs. Leave flowers, see the killer ranking, and check the endangered watchlist.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ntygod.github.io/api-graveyard/">
   <meta property="og:image" content="https://ntygod.github.io/api-graveyard/og-image.svg">
   <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="🪦 API 墓地 - R.I.P.">
-  <meta name="twitter:description" content="40+ 个已故 API 的墓碑。献花、杀手排行榜、濒危观察名单。">
+  <meta name="twitter:title" content="🪦 API Graveyard - R.I.P.">
+  <meta name="twitter:description" content="40+ tombstones for dead APIs. Leave flowers, killer ranking, endangered watchlist.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪦</text></svg>">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="fog"></div>
 
+  <!-- 语言切换 -->
+  <button class="lang-switch" id="lang-switch" title="Switch Language">🇨🇳/🇬🇧</button>
+
   <header>
-    <h1>🪦 API 墓地</h1>
-    <p class="subtitle">纪念那些曾经辉煌、如今已逝的 API 和服务</p>
+    <h1 id="h-title"></h1>
+    <p class="subtitle" id="h-subtitle"></p>
     <div class="stats" id="stats"></div>
   </header>
 
   <nav class="controls">
     <div class="search-box">
-      <input type="text" id="search" placeholder="搜索 API 名称、公司、标签...">
+      <input type="text" id="search" placeholder="">
     </div>
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">全部墓碑</button>
-      <button class="filter-btn" data-filter="killer">杀手排行榜</button>
-      <button class="filter-btn" data-filter="most-mourned">最受哀悼</button>
-      <button class="filter-btn" data-filter="endangered">⚠️ 濒危</button>
-      <button class="filter-btn" data-filter="timeline">📅 时间线</button>
-      <button class="filter-btn" data-filter="stats">📊 统计</button>
+      <button class="filter-btn active" data-filter="all" id="f-all"></button>
+      <button class="filter-btn" data-filter="killer" id="f-killer"></button>
+      <button class="filter-btn" data-filter="most-mourned" id="f-mourned"></button>
+      <button class="filter-btn" data-filter="endangered" id="f-endangered"></button>
+      <button class="filter-btn" data-filter="timeline" id="f-timeline"></button>
+      <button class="filter-btn" data-filter="stats" id="f-stats"></button>
     </div>
     <div class="sort-options">
       <select id="sort">
-        <option value="died-desc">最近去世</option>
-        <option value="died-asc">最早去世</option>
-        <option value="flowers-desc">献花最多</option>
-        <option value="name-asc">名称 A-Z</option>
+        <option value="died-desc" id="s-died-desc"></option>
+        <option value="died-asc" id="s-died-asc"></option>
+        <option value="flowers-desc" id="s-flowers"></option>
+        <option value="name-asc" id="s-name"></option>
       </select>
     </div>
   </nav>
@@ -60,7 +64,7 @@
   </main>
 
   <!-- 返回顶部 -->
-  <button class="back-to-top" id="back-to-top" title="返回顶部">↑</button>
+  <button class="back-to-top" id="back-to-top" title="">↑</button>
 
   <!-- 墓碑详情弹窗 -->
   <div class="modal-overlay" id="modal-overlay">
@@ -77,64 +81,65 @@
   <div class="modal-overlay" id="submit-overlay">
     <div class="modal" id="submit-modal">
       <button class="modal-close" id="submit-close">&times;</button>
-      <h2 style="color:var(--text-bright);font-weight:400;margin-bottom:20px;">🪦 提交讣告</h2>
+      <h2 style="color:var(--text-bright);font-weight:400;margin-bottom:20px;" id="submit-title"></h2>
       <form id="submit-form">
         <div class="form-row">
           <div class="form-group">
-            <label>API 名称 *</label>
-            <input type="text" name="name" required placeholder="如: Google Reader API">
+            <label id="fl-name"></label>
+            <input type="text" name="name" required placeholder="" id="fi-name">
           </div>
           <div class="form-group">
-            <label>图标 Emoji</label>
-            <input type="text" name="icon" placeholder="如: 📖" maxlength="4">
+            <label id="fl-icon"></label>
+            <input type="text" name="icon" placeholder="" maxlength="4" id="fi-icon">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>出生年份 *</label>
-            <input type="text" name="born" required placeholder="如: 2005">
+            <label id="fl-born"></label>
+            <input type="text" name="born" required placeholder="" id="fi-born">
           </div>
           <div class="form-group">
-            <label>死亡日期 *</label>
-            <input type="text" name="died" required placeholder="如: 2023-07-01">
+            <label id="fl-died"></label>
+            <input type="text" name="died" required placeholder="" id="fi-died">
           </div>
         </div>
         <div class="form-group">
-          <label>凶手 (公司/组织) *</label>
-          <input type="text" name="killedBy" required placeholder="如: Google">
+          <label id="fl-killer"></label>
+          <input type="text" name="killedBy" required placeholder="" id="fi-killer">
         </div>
         <div class="form-group">
-          <label>死因 *</label>
-          <textarea name="cause" required placeholder="简述为什么它死了..." rows="2"></textarea>
+          <label id="fl-cause"></label>
+          <textarea name="cause" required placeholder="" rows="2" id="fi-cause"></textarea>
         </div>
         <div class="form-group">
-          <label>遗言 (官方最后声明)</label>
-          <textarea name="lastWords" placeholder="官方的最后一句话..." rows="2"></textarea>
+          <label id="fl-lastwords"></label>
+          <textarea name="lastWords" placeholder="" rows="2" id="fi-lastwords"></textarea>
         </div>
         <div class="form-group">
-          <label>墓志铭 *</label>
-          <input type="text" name="epitaph" required placeholder="一句话总结它的一生">
+          <label id="fl-epitaph"></label>
+          <input type="text" name="epitaph" required placeholder="" id="fi-epitaph">
         </div>
         <div class="form-group">
-          <label>受影响者</label>
-          <input type="text" name="dependents" placeholder="哪些项目/用户受到了影响">
+          <label id="fl-dependents"></label>
+          <input type="text" name="dependents" placeholder="" id="fi-dependents">
         </div>
         <div class="form-group">
-          <label>标签 (逗号分隔)</label>
-          <input type="text" name="tags" placeholder="如: google, rss, 经典">
+          <label id="fl-tags"></label>
+          <input type="text" name="tags" placeholder="" id="fi-tags">
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-submit">📋 生成并跳转到 GitHub Issue</button>
+          <button type="submit" class="btn btn-submit" id="submit-btn"></button>
         </div>
       </form>
     </div>
   </div>
 
   <footer>
-    <p>你知道某个已经死去的 API 吗？<a href="#" id="open-submit">提交讣告</a></p>
-    <p class="footer-note">数据来源于公开信息 · 献花数据保存在本地浏览器 · 社区献花通过 GitHub Actions 定期合并</p>
+    <p><span id="footer-text"></span><a href="#" id="open-submit"></a></p>
+    <p class="footer-note" id="footer-note"></p>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
