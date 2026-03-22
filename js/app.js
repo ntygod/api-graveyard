@@ -37,7 +37,7 @@
   let currentView = 'all';
 
   // GitHub 仓库地址（用户需要改成自己的）
-  const GITHUB_REPO = 'your-username/api-graveyard';
+  const GITHUB_REPO = 'ntygod/api-graveyard';
 
   // ========== 渲染统计 ==========
   function renderStats() {
