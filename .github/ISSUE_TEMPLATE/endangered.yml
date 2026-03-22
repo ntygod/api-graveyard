@@ -1,0 +1,71 @@
+name: "⚠️ Endangered - Report an At-Risk API"
+description: "Report an API or service that may be dying soon"
+title: "[濒危] API_NAME"
+labels: ["endangered"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: API / Service Name
+      placeholder: "e.g. Chrome Extension Manifest V2"
+    validations:
+      required: true
+  - type: input
+    id: icon
+    attributes:
+      label: Icon Emoji
+      placeholder: "e.g. 🧩"
+    validations:
+      required: false
+  - type: input
+    id: born
+    attributes:
+      label: Birth Year
+      placeholder: "e.g. 2012"
+    validations:
+      required: true
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - at-risk
+        - deprecated
+        - sunset-announced
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline / Expected Death Date
+      placeholder: "e.g. 2025-06 or Unknown"
+    validations:
+      required: false
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why is it endangered?
+      placeholder: "Describe why this API/service is at risk..."
+    validations:
+      required: true
+  - type: input
+    id: alternative
+    attributes:
+      label: Alternative / Replacement
+      placeholder: "e.g. Manifest V3"
+    validations:
+      required: false
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma separated)
+      placeholder: "e.g. google, browser, extension"
+    validations:
+      required: false
+  - type: input
+    id: source
+    attributes:
+      label: Source Link
+      placeholder: "Link to deprecation notice or announcement"
+    validations:
+      required: false

@@ -1,0 +1,82 @@
+name: "🪦 Obituary - Submit a Dead API"
+description: "Report an API or service that has died"
+title: "[讣告] API_NAME (BIRTH_YEAR-DEATH_DATE)"
+labels: ["obituary"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: API / Service Name
+      placeholder: "e.g. Google Reader API"
+    validations:
+      required: true
+  - type: input
+    id: icon
+    attributes:
+      label: Icon Emoji
+      placeholder: "e.g. 📖"
+    validations:
+      required: false
+  - type: input
+    id: born
+    attributes:
+      label: Birth Year
+      placeholder: "e.g. 2005"
+    validations:
+      required: true
+  - type: input
+    id: died
+    attributes:
+      label: Death Date
+      placeholder: "e.g. 2023-07-01"
+    validations:
+      required: true
+  - type: input
+    id: killedBy
+    attributes:
+      label: Killed By (Company / Organization)
+      placeholder: "e.g. Google"
+    validations:
+      required: true
+  - type: textarea
+    id: cause
+    attributes:
+      label: Cause of Death
+      placeholder: "Briefly describe why it died..."
+    validations:
+      required: true
+  - type: textarea
+    id: lastWords
+    attributes:
+      label: Last Words (Official Statement)
+      placeholder: "The official last announcement..."
+    validations:
+      required: false
+  - type: input
+    id: epitaph
+    attributes:
+      label: Epitaph
+      placeholder: "One sentence to sum up its life"
+    validations:
+      required: true
+  - type: input
+    id: dependents
+    attributes:
+      label: Affected Users / Projects
+      placeholder: "Who was affected by its death"
+    validations:
+      required: false
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma separated)
+      placeholder: "e.g. google, rss, classic"
+    validations:
+      required: false
+  - type: input
+    id: source
+    attributes:
+      label: Source Link
+      placeholder: "Link to official announcement or news article"
+    validations:
+      required: false
