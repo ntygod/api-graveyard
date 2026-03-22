@@ -886,4 +886,377 @@ footer a:hover {
     flex-direction: column;
     gap: 10px;
   }
+
+  .timeline-line {
+    left: 20px;
+  }
+
+  .timeline-item {
+    padding-left: 50px;
+    padding-right: 0;
+  }
+
+  .timeline-item:nth-child(even) {
+    padding-left: 50px;
+    text-align: left;
+  }
+
+  .timeline-dot {
+    left: 14px;
+  }
+
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: 14px;
+    right: auto;
+  }
+
+  .chart-row {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .chart-box {
+    min-width: auto;
+  }
+}
+
+/* ========== 时间线视图 ========== */
+.timeline-view {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.timeline-header h2 {
+  color: var(--text-bright);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.timeline-header p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.timeline-container {
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--accent), var(--accent), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-year-group {
+  margin-bottom: 40px;
+}
+
+.timeline-year {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+.timeline-year span {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding-right: 40px;
+  padding-bottom: 16px;
+  animation: riseUp 0.5s ease backwards;
+}
+
+.timeline-item:nth-child(even) {
+  margin-left: 50%;
+  padding-right: 0;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  right: -7px;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-glow);
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(155, 143, 196, 0.4);
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -7px;
+  right: auto;
+}
+
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.timeline-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(124, 111, 155, 0.15);
+}
+
+.timeline-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.timeline-card-icon {
+  font-size: 1.5rem;
+}
+
+.timeline-card-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.timeline-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.timeline-card-epitaph {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.timeline-card-killer {
+  font-size: 0.75rem;
+  color: var(--red);
+  margin-top: 8px;
+}
+
+/* ========== 统计图表 ========== */
+.stats-view {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stats-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.stats-header h2 {
+  color: var(--text-bright);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.chart-row {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.chart-box {
+  flex: 1;
+  min-width: 0;
+}
+
+.chart-title {
+  font-size: 1rem;
+  color: var(--text-bright);
+  margin-bottom: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* 横向柱状图 */
+.h-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.h-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.h-bar-label {
+  min-width: 120px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.h-bar-track {
+  flex: 1;
+  height: 24px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.h-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--flower-color));
+  transition: width 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  min-width: 30px;
+}
+
+.h-bar-value {
+  font-size: 0.75rem;
+  color: #fff;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+/* 纵向柱状图 */
+.v-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 200px;
+  padding-top: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.v-bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.v-bar-fill {
+  width: 100%;
+  max-width: 36px;
+  background: linear-gradient(to top, var(--accent), var(--accent-glow));
+  border-radius: 4px 4px 0 0;
+  transition: height 1s ease;
+  position: relative;
+  min-height: 2px;
+}
+
+.v-bar-count {
+  font-size: 0.7rem;
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  margin-bottom: 4px;
+}
+
+.v-bar-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-top: 8px;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  max-height: 50px;
+  overflow: hidden;
+}
+
+/* ========== 返回顶部 ========== */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.back-to-top:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ========== 墓碑微光悬停增强 ========== */
+.tombstone::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(155, 143, 196, 0.08) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tombstone:hover::after {
+  opacity: 1;
+}
+
+/* ========== 献花数字跳动 ========== */
+.flower-count-animate {
+  animation: countPop 0.3s ease;
+}
+
+@keyframes countPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); color: #fff; }
+  100% { transform: scale(1); }
 }

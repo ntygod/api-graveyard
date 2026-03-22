@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API 墓地 - R.I.P. 那些离我们而去的 API</title>
   <meta name="description" content="纪念那些曾经辉煌、如今已逝的 API 和服务。献一束花，缅怀它们。">
+  <!-- Open Graph -->
+  <meta property="og:title" content="API 墓地 - R.I.P. 那些离我们而去的 API">
+  <meta property="og:description" content="40+ 个已故 API 的墓碑。献花、杀手排行榜、濒危观察名单。来缅怀那些改变过世界的 API。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ntygod.github.io/api-graveyard/">
+  <meta property="og:image" content="https://ntygod.github.io/api-graveyard/og-image.svg">
+  <meta property="og:locale" content="zh_CN">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🪦 API 墓地 - R.I.P.">
+  <meta name="twitter:description" content="40+ 个已故 API 的墓碑。献花、杀手排行榜、濒危观察名单。">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪦</text></svg>">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -26,6 +37,8 @@
       <button class="filter-btn" data-filter="killer">杀手排行榜</button>
       <button class="filter-btn" data-filter="most-mourned">最受哀悼</button>
       <button class="filter-btn" data-filter="endangered">⚠️ 濒危</button>
+      <button class="filter-btn" data-filter="timeline">📅 时间线</button>
+      <button class="filter-btn" data-filter="stats">📊 统计</button>
     </div>
     <div class="sort-options">
       <select id="sort">
@@ -42,7 +55,12 @@
     <section id="killer-board" class="killer-board hidden"></section>
     <section id="most-mourned" class="most-mourned hidden"></section>
     <section id="endangered" class="endangered hidden"></section>
+    <section id="timeline" class="timeline-view hidden"></section>
+    <section id="stats-view" class="stats-view hidden"></section>
   </main>
+
+  <!-- 返回顶部 -->
+  <button class="back-to-top" id="back-to-top" title="返回顶部">↑</button>
 
   <!-- 墓碑详情弹窗 -->
   <div class="modal-overlay" id="modal-overlay">

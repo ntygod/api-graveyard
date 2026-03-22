@@ -22,6 +22,8 @@
   const $killerBoard = document.getElementById('killer-board');
   const $mostMourned = document.getElementById('most-mourned');
   const $endangered = document.getElementById('endangered');
+  const $timeline = document.getElementById('timeline');
+  const $statsView = document.getElementById('stats-view');
   const $stats = document.getElementById('stats');
   const $search = document.getElementById('search');
   const $sort = document.getElementById('sort');
@@ -32,11 +34,20 @@
   const $submitClose = document.getElementById('submit-close');
   const $submitForm = document.getElementById('submit-form');
   const $openSubmit = document.getElementById('open-submit');
+  const $backToTop = document.getElementById('back-to-top');
   const filterBtns = document.querySelectorAll('.filter-btn');
 
-  let currentView = 'all';
+  const allSections = [$graveyard, $killerBoard, $mostMourned, $endangered, $timeline, $statsView];
+  const viewMap = {
+    'all': $graveyard,
+    'killer': $killerBoard,
+    'most-mourned': $mostMourned,
+    'endangered': $endangered,
+    'timeline': $timeline,
+    'stats': $statsView
+  };
 
-  // GitHub 仓库地址（用户需要改成自己的）
+  let currentView = 'all';
   const GITHUB_REPO = 'ntygod/api-graveyard';
 
   // ========== 渲染统计 ==========
@@ -89,6 +100,12 @@
           </button>
         </div>
       `;
+      // 微光跟随鼠标
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        el.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
+      });
       el.addEventListener('click', (e) => {
         if (e.target.closest('.flower-btn')) return;
         openModal(api);
@@ -106,18 +123,10 @@
   function sortApis(list, method) {
     const sorted = [...list];
     switch (method) {
-      case 'died-desc':
-        sorted.sort((a, b) => b.died.localeCompare(a.died));
-        break;
-      case 'died-asc':
-        sorted.sort((a, b) => a.died.localeCompare(b.died));
-        break;
-      case 'flowers-desc':
-        sorted.sort((a, b) => b.flowers - a.flowers);
-        break;
-      case 'name-asc':
-        sorted.sort((a, b) => a.name.localeCompare(b.name));
-        break;
+      case 'died-desc': sorted.sort((a, b) => b.died.localeCompare(a.died)); break;
+      case 'died-asc': sorted.sort((a, b) => a.died.localeCompare(b.died)); break;
+      case 'flowers-desc': sorted.sort((a, b) => b.flowers - a.flowers); break;
+      case 'name-asc': sorted.sort((a, b) => a.name.localeCompare(b.name)); break;
     }
     return sorted;
   }
@@ -143,7 +152,10 @@
 
     if (btn) {
       btn.classList.add('flowered');
-      btn.querySelector('.flower-count').textContent = formatNumber(api.flowers);
+      const countEl = btn.querySelector('.flower-count');
+      countEl.textContent = formatNumber(api.flowers);
+      countEl.classList.add('flower-count-animate');
+      setTimeout(() => countEl.classList.remove('flower-count-animate'), 300);
     }
 
     // 飘花动画
@@ -162,9 +174,7 @@
   function renderKillerBoard() {
     const killerMap = {};
     apis.forEach(api => {
-      if (!killerMap[api.killedBy]) {
-        killerMap[api.killedBy] = [];
-      }
+      if (!killerMap[api.killedBy]) killerMap[api.killedBy] = [];
       killerMap[api.killedBy].push(api);
     });
 
@@ -267,6 +277,122 @@
     });
   }
 
+  // ========== 时间线视图 ==========
+  function renderTimeline() {
+    const sorted = [...apis].sort((a, b) => a.died.localeCompare(b.died));
+
+    // 按年份分组
+    const yearGroups = {};
+    sorted.forEach(api => {
+      const year = api.died.substring(0, 4);
+      if (!yearGroups[year]) yearGroups[year] = [];
+      yearGroups[year].push(api);
+    });
+
+    $timeline.innerHTML = `
+      <div class="timeline-header">
+        <h2>📅 API 死亡时间线</h2>
+        <p>从最早到最近，见证 API 的消逝</p>
+      </div>
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+      </div>
+    `;
+
+    const container = $timeline.querySelector('.timeline-container');
+    let itemIndex = 0;
+
+    Object.entries(yearGroups).forEach(([year, items]) => {
+      const yearEl = document.createElement('div');
+      yearEl.className = 'timeline-year-group';
+
+      const yearLabel = document.createElement('div');
+      yearLabel.className = 'timeline-year';
+      yearLabel.innerHTML = `<span>${year}</span>`;
+      yearEl.appendChild(yearLabel);
+
+      items.forEach((api) => {
+        const item = document.createElement('div');
+        item.className = 'timeline-item';
+        item.style.animationDelay = `${itemIndex * 0.06}s`;
+        item.innerHTML = `
+          <div class="timeline-dot"></div>
+          <div class="timeline-card" data-id="${api.id}">
+            <div class="timeline-card-header">
+              <span class="timeline-card-icon">${api.icon}</span>
+              <span class="timeline-card-name">${api.name}</span>
+            </div>
+            <div class="timeline-card-date">${api.born} — ${api.died}</div>
+            <div class="timeline-card-epitaph">"${api.epitaph}"</div>
+            <div class="timeline-card-killer">☠ ${api.killedBy}</div>
+          </div>
+        `;
+        item.querySelector('.timeline-card').addEventListener('click', () => openModal(api));
+        yearEl.appendChild(item);
+        itemIndex++;
+      });
+
+      container.appendChild(yearEl);
+    });
+  }
+
+  // ========== 统计图表 ==========
+  function renderStatsView() {
+    // 按公司统计
+    const killerMap = {};
+    apis.forEach(api => {
+      killerMap[api.killedBy] = (killerMap[api.killedBy] || 0) + 1;
+    });
+    const killersSorted = Object.entries(killerMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10);
+    const maxKills = killersSorted[0]?.[1] || 1;
+
+    // 按年份统计
+    const yearMap = {};
+    apis.forEach(api => {
+      const year = api.died.substring(0, 4);
+      yearMap[year] = (yearMap[year] || 0) + 1;
+    });
+    const yearsSorted = Object.entries(yearMap).sort((a, b) => a[0].localeCompare(b[0]));
+    const maxYear = Math.max(...yearsSorted.map(y => y[1]));
+
+    $statsView.innerHTML = `
+      <div class="stats-header">
+        <h2>📊 数据统计</h2>
+      </div>
+      <div class="chart-row">
+        <div class="chart-box">
+          <div class="chart-title">☠ 公司杀死 API 数量 TOP 10</div>
+          <div class="h-bar-chart">
+            ${killersSorted.map(([name, count]) => `
+              <div class="h-bar-item">
+                <div class="h-bar-label">${name}</div>
+                <div class="h-bar-track">
+                  <div class="h-bar-fill" style="width: ${(count / maxKills) * 100}%">
+                    <span class="h-bar-value">${count}</span>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="chart-box" style="margin-top:20px;">
+        <div class="chart-title">📅 各年份 API 死亡数量</div>
+        <div class="v-bar-chart">
+          ${yearsSorted.map(([year, count]) => `
+            <div class="v-bar-item">
+              <div class="v-bar-count">${count}</div>
+              <div class="v-bar-fill" style="height: ${(count / maxYear) * 100}%"></div>
+              <div class="v-bar-label">${year}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   // ========== 弹窗 ==========
   function openModal(api) {
     $modalContent.innerHTML = `
@@ -318,13 +444,16 @@
       document.getElementById('modal-flower-btn').innerHTML = `🌸 献花 (${formatNumber(api.flowers)})`;
       const listBtn = document.querySelector(`.flower-btn[data-id="${api.id}"]`);
       if (listBtn) {
-        listBtn.querySelector('.flower-count').textContent = formatNumber(api.flowers);
+        const countEl = listBtn.querySelector('.flower-count');
+        countEl.textContent = formatNumber(api.flowers);
+        countEl.classList.add('flower-count-animate');
+        setTimeout(() => countEl.classList.remove('flower-count-animate'), 300);
         listBtn.classList.add('flowered');
       }
     });
 
     document.getElementById('modal-share-btn').addEventListener('click', () => {
-      const text = `🪦 R.I.P. ${api.name} (${api.born}-${api.died})\n\n"${api.epitaph}"\n\n死因: ${api.cause}\n凶手: ${api.killedBy}\n\n#API墓地 #RIP`;
+      const text = `🪦 R.I.P. ${api.name} (${api.born}-${api.died})\n\n"${api.epitaph}"\n\n死因: ${api.cause}\n凶手: ${api.killedBy}\n\n#API墓地 #RIP\nhttps://ntygod.github.io/api-graveyard/#/api/${api.id}`;
       navigator.clipboard.writeText(text).then(() => {
         showToast('已复制到剪贴板，去分享吧！');
       }).catch(() => {
@@ -332,11 +461,16 @@
       });
     });
 
+    // 更新 URL hash
+    history.replaceState(null, '', `#/api/${api.id}`);
     $modalOverlay.classList.add('active');
   }
 
   function closeModal() {
     $modalOverlay.classList.remove('active');
+    // 恢复视图 hash
+    const viewHash = currentView === 'all' ? '' : `#/${currentView}`;
+    history.replaceState(null, '', viewHash || window.location.pathname);
   }
 
   // ========== 提交表单 ==========
@@ -364,7 +498,6 @@
       tags: fd.get('tags') ? fd.get('tags').split(',').map(t => t.trim()).filter(Boolean) : []
     };
 
-    // 生成 GitHub Issue 内容
     const title = encodeURIComponent(`[讣告] ${data.name} (${data.born}-${data.died})`);
     const body = encodeURIComponent(
 `## ${data.icon} ${data.name}
@@ -429,16 +562,57 @@ ${data.tags.join(', ')}
   }
 
   // ========== 视图切换 ==========
-  function switchView(view) {
+  function switchView(view, updateHash) {
     currentView = view;
-    $graveyard.classList.toggle('hidden', view !== 'all');
-    $killerBoard.classList.toggle('hidden', view !== 'killer');
-    $mostMourned.classList.toggle('hidden', view !== 'most-mourned');
-    $endangered.classList.toggle('hidden', view !== 'endangered');
+    allSections.forEach(s => s.classList.add('hidden'));
+    if (viewMap[view]) viewMap[view].classList.remove('hidden');
 
+    if (view === 'all') refresh();
     if (view === 'killer') renderKillerBoard();
     if (view === 'most-mourned') renderMostMourned();
     if (view === 'endangered') renderEndangered();
+    if (view === 'timeline') renderTimeline();
+    if (view === 'stats') renderStatsView();
+
+    // 更新按钮状态
+    filterBtns.forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === view);
+    });
+
+    // 更新 URL hash
+    if (updateHash !== false) {
+      const hash = view === 'all' ? '' : `#/${view}`;
+      history.replaceState(null, '', hash || window.location.pathname);
+    }
+  }
+
+  // ========== URL 路由 ==========
+  function handleRoute() {
+    const hash = window.location.hash;
+    if (!hash) {
+      switchView('all', false);
+      return;
+    }
+
+    // #/api/xxx — 打开具体 API 弹窗
+    const apiMatch = hash.match(/^#\/api\/(.+)$/);
+    if (apiMatch) {
+      const api = apis.find(a => a.id === apiMatch[1]);
+      if (api) {
+        switchView('all', false);
+        setTimeout(() => openModal(api), 100);
+        return;
+      }
+    }
+
+    // #/view-name — 切换视图
+    const viewMatch = hash.match(/^#\/(.+)$/);
+    if (viewMatch && viewMap[viewMatch[1]]) {
+      switchView(viewMatch[1], false);
+      return;
+    }
+
+    switchView('all', false);
   }
 
   // ========== 事件绑定 ==========
@@ -449,7 +623,6 @@ ${data.tags.join(', ')}
     if (e.target === $modalOverlay) closeModal();
   });
 
-  // 提交表单事件
   $openSubmit.addEventListener('click', (e) => {
     e.preventDefault();
     openSubmitForm();
@@ -469,13 +642,22 @@ ${data.tags.join(', ')}
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
       switchView(btn.dataset.filter);
     });
   });
 
+  // 返回顶部
+  window.addEventListener('scroll', () => {
+    $backToTop.classList.toggle('visible', window.scrollY > 400);
+  });
+  $backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // hash 变化
+  window.addEventListener('hashchange', handleRoute);
+
   // ========== 初始化 ==========
   renderStats();
-  refresh();
+  handleRoute();
 })();
