@@ -5,8 +5,6 @@
 [🇨🇳 中文版](./README-zh.md)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![APIs](https://img.shields.io/badge/dead%20APIs-40%2B-red)
-![Endangered](https://img.shields.io/badge/endangered-10%2B-orange)
 
 ## Live Demo
 
@@ -14,7 +12,7 @@
 
 ## Features
 
-- 🪦 **Tombstone Cards** — Browse 40+ dead APIs with full details
+- 🪦 **Tombstone Cards** — Browse dead APIs with full details
 - 🌸 **Leave Flowers** — Pay respects (local + community merged)
 - ☠ **Killer Ranking** — See which company killed the most APIs
 - ⚠️ **Endangered Watchlist** — APIs still alive but probably not for long

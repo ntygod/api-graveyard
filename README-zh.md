@@ -5,8 +5,6 @@
 [🇬🇧 English](./README.md)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![APIs](https://img.shields.io/badge/已故%20API-40%2B-red)
-![Endangered](https://img.shields.io/badge/濒危-10%2B-orange)
 
 ## 在线预览
 
@@ -14,7 +12,7 @@
 
 ## 功能
 
-- 🪦 **墓碑卡片** — 浏览 40+ 个已故 API 的详细信息
+- 🪦 **墓碑卡片** — 浏览已故 API 的详细信息
 - 🌸 **献花** — 为你怀念的 API 献上一束花（本地 + 社区合并）
 - ☠ **杀手排行榜** — 看看哪家公司杀死的 API 最多
 - ⚠️ **濒危 API 观察名单** — 那些还活着但可能撑不了多久的 API
