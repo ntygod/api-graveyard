@@ -398,7 +398,8 @@
       <div class="modal-section"><div class="modal-section-title">${t.sectionTags}</div><div class="modal-tags">${api.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div></div>
       <div class="modal-actions">
         <button class="btn btn-flower" id="modal-flower-btn">${t.flower} (${formatNumber(api.flowers)})</button>
-        <button class="btn btn-share" id="modal-share-btn">${t.copyShare}</button>
+        <button class="btn btn-share" id="modal-share-btn">${t.shareImage}</button>
+        <button class="btn btn-share" id="modal-copy-btn">${t.copyShare}</button>
       </div>
     `;
     document.getElementById('modal-flower-btn').addEventListener('click', (e) => {
@@ -414,6 +415,9 @@
       }
     });
     document.getElementById('modal-share-btn').addEventListener('click', () => {
+      generateShareCard(api);
+    });
+    document.getElementById('modal-copy-btn').addEventListener('click', () => {
       navigator.clipboard.writeText(t.shareTemplate(api)).then(() => {
         showToast(t.copiedToast);
       }).catch(() => {
@@ -422,6 +426,139 @@
     });
     history.replaceState(null, '', `#/api/${api.id}`);
     $modalOverlay.classList.add('active');
+  }
+
+  // ========== 生成分享卡片 ==========
+  function generateShareCard(api) {
+    const canvas = document.getElementById('share-canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 800, H = 500;
+
+    // 背景
+    const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+    bgGrad.addColorStop(0, '#0a0a0f');
+    bgGrad.addColorStop(1, '#1a1a2e');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // 雾气效果
+    const fogGrad = ctx.createRadialGradient(200, 250, 0, 200, 250, 300);
+    fogGrad.addColorStop(0, 'rgba(100, 80, 140, 0.06)');
+    fogGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = fogGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // 墓碑形状
+    const stoneX = 200, stoneY = 60, stoneW = 400, stoneH = 340;
+    const archR = stoneW / 2;
+    ctx.beginPath();
+    ctx.moveTo(stoneX, stoneY + archR);
+    ctx.arcTo(stoneX, stoneY, stoneX + archR, stoneY, archR);
+    ctx.arcTo(stoneX + stoneW, stoneY, stoneX + stoneW, stoneY + archR, archR);
+    ctx.lineTo(stoneX + stoneW, stoneY + stoneH);
+    ctx.lineTo(stoneX, stoneY + stoneH);
+    ctx.closePath();
+    ctx.fillStyle = '#181820';
+    ctx.fill();
+    ctx.strokeStyle = '#3a3a4a';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 顶部渐变线
+    const topGrad = ctx.createLinearGradient(stoneX, stoneY, stoneX + stoneW, stoneY);
+    topGrad.addColorStop(0, 'transparent');
+    topGrad.addColorStop(0.5, '#9b8fc4');
+    topGrad.addColorStop(1, 'transparent');
+    ctx.strokeStyle = topGrad;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(stoneX + 40, stoneY + 80);
+    ctx.lineTo(stoneX + stoneW - 40, stoneY + 80);
+    ctx.stroke();
+
+    // Icon
+    ctx.font = '40px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(api.icon, W / 2, stoneY + 65);
+
+    // API 名称
+    ctx.font = 'bold 22px "Playfair Display", Georgia, serif';
+    ctx.fillStyle = '#e8e8f0';
+    ctx.textAlign = 'center';
+    // 长名称截断
+    let name = api.name;
+    if (ctx.measureText(name).width > stoneW - 60) {
+      while (ctx.measureText(name + '...').width > stoneW - 60 && name.length > 0) name = name.slice(0, -1);
+      name += '...';
+    }
+    ctx.fillText(name, W / 2, stoneY + 115);
+
+    // 生卒年
+    const diedYear = api.died.length > 4 ? api.died.substring(0, 4) : api.died;
+    ctx.font = '14px "Cascadia Code", "Fira Code", Consolas, monospace';
+    ctx.fillStyle = '#6a6a7a';
+    ctx.fillText(`${api.born} — ${diedYear}`, W / 2, stoneY + 142);
+
+    // 分隔线
+    ctx.strokeStyle = '#2a2a35';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(stoneX + 60, stoneY + 158);
+    ctx.lineTo(stoneX + stoneW - 60, stoneY + 158);
+    ctx.stroke();
+
+    // 墓志铭
+    ctx.font = 'italic 16px "Playfair Display", Georgia, serif';
+    ctx.fillStyle = '#9b8fc4';
+    const epitaph = `"${api.epitaph}"`;
+    const epitaphLines = wrapText(ctx, epitaph, stoneW - 80);
+    epitaphLines.forEach((line, i) => {
+      ctx.fillText(line, W / 2, stoneY + 185 + i * 24);
+    });
+
+    // 死因
+    const infoY = stoneY + 185 + epitaphLines.length * 24 + 20;
+    ctx.font = '13px "Segoe UI", system-ui, sans-serif';
+    ctx.fillStyle = '#8a4a4a';
+    ctx.fillText(`☠ ${api.killedBy}`, W / 2, infoY);
+
+    // 底部水印
+    ctx.font = '12px "Segoe UI", system-ui, sans-serif';
+    ctx.fillStyle = '#4a4a5a';
+    ctx.fillText('ntygod.github.io/api-graveyard', W / 2, H - 25);
+
+    // R.I.P.
+    ctx.font = '11px "Cascadia Code", monospace';
+    ctx.fillStyle = '#3a3a4a';
+    ctx.fillText('R.I.P.', W / 2, stoneY + stoneH - 15);
+
+    // 下载
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `rip-${api.id}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast(t.shareImageToast);
+    });
+  }
+
+  // Canvas 文字换行
+  function wrapText(ctx, text, maxWidth) {
+    const lines = [];
+    let current = '';
+    for (const char of text) {
+      const test = current + char;
+      if (ctx.measureText(test).width > maxWidth && current) {
+        lines.push(current);
+        current = char;
+      } else {
+        current = test;
+      }
+    }
+    if (current) lines.push(current);
+    return lines.slice(0, 3); // 最多3行
   }
 
   function closeModal() {

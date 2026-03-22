@@ -94,6 +94,10 @@ const I18N = {
     memorialBanner: (name, years) => `🕯️ 今天是 ${name} 的 ${years} 周年忌日`,
     daysUntilDeath: (days) => `⏳ 距离死亡还有 ${days} 天`,
     flowerRainToast: '🌸 触发花雨！感谢你的深情厚谊！',
+    shareImage: '🖼️ 生成分享图',
+    shareImageToast: '图片已生成，正在下载...',
+    shareImageCause: '死因',
+    shareImageKiller: '凶手',
   },
   en: {
     title: '🪦 API Graveyard',
@@ -172,5 +176,9 @@ const I18N = {
     memorialBanner: (name, years) => `🕯️ Today marks the ${years}-year anniversary of ${name}'s death`,
     daysUntilDeath: (days) => `⏳ ${days} days until death`,
     flowerRainToast: '🌸 Flower rain triggered! Thanks for your devotion!',
+    shareImage: '🖼️ Share Image',
+    shareImageToast: 'Image generated, downloading...',
+    shareImageCause: 'Cause',
+    shareImageKiller: 'Killed by',
   }
 };
