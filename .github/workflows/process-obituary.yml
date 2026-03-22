@@ -1,0 +1,140 @@
+name: 自动处理讣告提交
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  process-obituary:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'obituary-approved')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: 解析 Issue 并添加到 apis.json
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+
+            // 解析 Issue body 中的字段
+            function extract(label) {
+              const regex = new RegExp(`\\*\\*${label}\\*\\*:\\s*(.+)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            }
+
+            function extractSection(title) {
+              const regex = new RegExp(`### ${title}\\s*\\n([\\s\\S]*?)(?=###|---|$)`, 'i');
+              const match = body.match(regex);
+              return match ? match[1].trim() : '';
+            }
+
+            // 从标题提取名称
+            const titleMatch = issue.title.match(/\[讣告\]\s*(.+?)\s*\((\d{4})-(.+?)\)/);
+            if (!titleMatch) {
+              console.log('Issue 标题格式不匹配，跳过');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '❌ 无法解析 Issue 标题，格式应为: `[讣告] API名称 (出生年份-死亡日期)`'
+              });
+              return;
+            }
+
+            const name = titleMatch[1].trim();
+            const born = titleMatch[2];
+            const died = titleMatch[3];
+
+            // 生成 id
+            const id = name.toLowerCase()
+              .replace(/[^a-z0-9\u4e00-\u9fff]+/g, '-')
+              .replace(/^-|-$/g, '')
+              .substring(0, 40);
+
+            // 提取各字段
+            const killedBy = extract('凶手') || '未知';
+            const cause = extractSection('死因') || '未知';
+            const lastWords = extractSection('遗言') || '(无)';
+            const epitaph = extractSection('墓志铭').replace(/^>\s*/, '') || name;
+            const dependents = extractSection('受影响者') || '(未知)';
+            const tagsRaw = extractSection('标签');
+            const tags = tagsRaw ? tagsRaw.split(/[,，、]/).map(t => t.trim()).filter(Boolean) : [];
+
+            // 提取 emoji（从 body 的第一行 ## 后面）
+            const iconMatch = body.match(/^## (.)/m);
+            const icon = iconMatch ? iconMatch[1] : '🪦';
+
+            // 读取现有数据
+            const apis = JSON.parse(fs.readFileSync('data/apis.json', 'utf8'));
+
+            // 检查是否已存在
+            if (apis.some(a => a.id === id)) {
+              console.log('API 已存在: ' + id);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `⚠️ ID \`${id}\` 已存在，跳过添加。`
+              });
+              return;
+            }
+
+            // 添加新条目
+            const newApi = {
+              id,
+              name,
+              born,
+              died,
+              icon,
+              cause,
+              lastWords,
+              epitaph,
+              killedBy,
+              dependents,
+              tags,
+              flowers: 0
+            };
+
+            apis.push(newApi);
+            fs.writeFileSync('data/apis.json', JSON.stringify(apis, null, 2) + '\n');
+
+            console.log('已添加: ' + name);
+            core.exportVariable('NEW_API_NAME', name);
+            core.exportVariable('ISSUE_NUMBER', issue.number);
+
+      - name: 提交并推送
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/apis.json
+          git diff --cached --quiet || git commit -m "feat: 新增 ${{ env.NEW_API_NAME }} (via #${{ env.ISSUE_NUMBER }})"
+          git push
+
+      - name: 关闭 Issue 并评论
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: '✅ 已自动添加到 API 墓地！感谢你的贡献 🪦🌸\n\n网站将在几分钟内更新。'
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              state: 'closed'
+            });
