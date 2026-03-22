@@ -10,8 +10,12 @@
     "epitaph": "RSS 永远不死，但我先走一步了",
     "killedBy": "Google",
     "dependents": "Feedly、Reeder、无数 RSS 客户端被迫迁移",
-    "tags": ["google", "rss", "经典"],
-    "flowers": 12453
+    "tags": [
+      "google",
+      "rss",
+      "经典"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-plus",
@@ -24,8 +28,11 @@
     "epitaph": "我试过了，真的试过了",
     "killedBy": "Google",
     "dependents": "Google+ 登录集成、社交分享按钮",
-    "tags": ["google", "社交"],
-    "flowers": 3201
+    "tags": [
+      "google",
+      "社交"
+    ],
+    "flowers": 0
   },
   {
     "id": "parse",
@@ -38,8 +45,12 @@
     "epitaph": "BaaS 先驱，死于大厂的冷漠",
     "killedBy": "Facebook",
     "dependents": "数万个移动应用的后端",
-    "tags": ["facebook", "baas", "移动端"],
-    "flowers": 8920
+    "tags": [
+      "facebook",
+      "baas",
+      "移动端"
+    ],
+    "flowers": 0
   },
   {
     "id": "vine",
@@ -52,8 +63,12 @@
     "epitaph": "6秒改变世界，然后世界忘了我",
     "killedBy": "Twitter",
     "dependents": "无数短视频创作者、第三方客户端",
-    "tags": ["twitter", "视频", "社交"],
-    "flowers": 15670
+    "tags": [
+      "twitter",
+      "视频",
+      "社交"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-hangouts",
@@ -66,8 +81,11 @@
     "epitaph": "Google 的第 N 个聊天应用，不会是最后一个",
     "killedBy": "Google",
     "dependents": "企业集成、聊天机器人",
-    "tags": ["google", "通讯"],
-    "flowers": 4510
+    "tags": [
+      "google",
+      "通讯"
+    ],
+    "flowers": 0
   },
   {
     "id": "flickr-original",
@@ -80,8 +98,11 @@
     "epitaph": "曾经的照片王者，输给了时代",
     "killedBy": "SmugMug",
     "dependents": "摄影社区、第三方相册应用",
-    "tags": ["摄影", "存储"],
-    "flowers": 6230
+    "tags": [
+      "摄影",
+      "存储"
+    ],
+    "flowers": 0
   },
   {
     "id": "yahoo-pipes",
@@ -94,8 +115,12 @@
     "epitaph": "可视化编程的先驱，生不逢时",
     "killedBy": "Yahoo",
     "dependents": "数据聚合工作流、RSS 混搭应用",
-    "tags": ["yahoo", "数据", "先驱"],
-    "flowers": 3450
+    "tags": [
+      "yahoo",
+      "数据",
+      "先驱"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-url-shortener",
@@ -108,8 +133,11 @@
     "epitaph": "短链接，短命",
     "killedBy": "Google",
     "dependents": "无数应用的短链接功能",
-    "tags": ["google", "工具"],
-    "flowers": 5120
+    "tags": [
+      "google",
+      "工具"
+    ],
+    "flowers": 0
   },
   {
     "id": "firebase-dynamic-links",
@@ -122,8 +150,12 @@
     "epitaph": "杀死了 goo.gl，然后自己也死了，讽刺吗",
     "killedBy": "Google",
     "dependents": "移动端深度链接、营销追踪",
-    "tags": ["google", "firebase", "移动端"],
-    "flowers": 7890
+    "tags": [
+      "google",
+      "firebase",
+      "移动端"
+    ],
+    "flowers": 0
   },
   {
     "id": "heroku-free",
@@ -136,8 +168,12 @@
     "epitaph": "一代开发者的启蒙平台，死于商业化",
     "killedBy": "Salesforce",
     "dependents": "无数学生项目、个人项目、小型创业公司",
-    "tags": ["paas", "免费", "经典"],
-    "flowers": 23100
+    "tags": [
+      "paas",
+      "免费",
+      "经典"
+    ],
+    "flowers": 0
   },
   {
     "id": "twitter-api-free",
@@ -150,8 +186,12 @@
     "epitaph": "开放生态的典范，死于新主人的贪婪",
     "killedBy": "Elon Musk / X Corp",
     "dependents": "Tweetbot、数千个机器人、学术研究、数据分析工具",
-    "tags": ["twitter", "社交", "经典"],
-    "flowers": 31200
+    "tags": [
+      "twitter",
+      "社交",
+      "经典"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-stadia",
@@ -164,8 +204,11 @@
     "epitaph": "云游戏的未来，但不是我的未来",
     "killedBy": "Google",
     "dependents": "游戏开发者、Stadia 独占游戏",
-    "tags": ["google", "游戏"],
-    "flowers": 9870
+    "tags": [
+      "google",
+      "游戏"
+    ],
+    "flowers": 0
   },
   {
     "id": "yahoo-weather",
@@ -178,8 +221,12 @@
     "epitaph": "天气预报不免费了，但天气还是免费的",
     "killedBy": "Yahoo / Verizon",
     "dependents": "天气应用、智能家居集成",
-    "tags": ["yahoo", "天气", "免费"],
-    "flowers": 4100
+    "tags": [
+      "yahoo",
+      "天气",
+      "免费"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-inbox",
@@ -192,8 +239,11 @@
     "epitaph": "比 Gmail 好用，所以必须死",
     "killedBy": "Google",
     "dependents": "Inbox 用户、邮件自动化工具",
-    "tags": ["google", "邮件"],
-    "flowers": 8760
+    "tags": [
+      "google",
+      "邮件"
+    ],
+    "flowers": 0
   },
   {
     "id": "microsoft-codespaces-old",
@@ -206,8 +256,11 @@
     "epitaph": "名字被偷了，灵魂也被偷了",
     "killedBy": "Microsoft / GitHub",
     "dependents": "VS Codespaces 用户",
-    "tags": ["microsoft", "开发工具"],
-    "flowers": 2340
+    "tags": [
+      "microsoft",
+      "开发工具"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-allo",
@@ -220,8 +273,11 @@
     "epitaph": "Google 聊天应用墓地 +1",
     "killedBy": "Google",
     "dependents": "几乎没有，因为几乎没人用",
-    "tags": ["google", "通讯"],
-    "flowers": 1890
+    "tags": [
+      "google",
+      "通讯"
+    ],
+    "flowers": 0
   },
   {
     "id": "fabric-crashlytics-legacy",
@@ -234,8 +290,12 @@
     "epitaph": "被收购是另一种死法",
     "killedBy": "Google / Firebase",
     "dependents": "数十万移动应用的崩溃监控",
-    "tags": ["google", "移动端", "监控"],
-    "flowers": 6540
+    "tags": [
+      "google",
+      "移动端",
+      "监控"
+    ],
+    "flowers": 0
   },
   {
     "id": "mlab",
@@ -248,8 +308,12 @@
     "epitaph": "免费 MongoDB 的代名词，死于被收购",
     "killedBy": "MongoDB Inc.",
     "dependents": "无数学生项目和原型应用",
-    "tags": ["数据库", "免费", "mongodb"],
-    "flowers": 5670
+    "tags": [
+      "数据库",
+      "免费",
+      "mongodb"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-cloud-print",
@@ -262,8 +326,11 @@
     "epitaph": "云打印听起来很酷，但没人在乎",
     "killedBy": "Google",
     "dependents": "Chromebook 用户、企业打印方案",
-    "tags": ["google", "硬件"],
-    "flowers": 3120
+    "tags": [
+      "google",
+      "硬件"
+    ],
+    "flowers": 0
   },
   {
     "id": "internet-explorer",
@@ -276,8 +343,12 @@
     "epitaph": "我不是最好的浏览器，但我是下载其他浏览器的最好工具",
     "killedBy": "Microsoft",
     "dependents": "无数企业内网系统、ActiveX 控件",
-    "tags": ["microsoft", "浏览器", "经典"],
-    "flowers": 45600
+    "tags": [
+      "microsoft",
+      "浏览器",
+      "经典"
+    ],
+    "flowers": 0
   },
   {
     "id": "bintray-jcenter",
@@ -290,8 +361,12 @@
     "epitaph": "半个 Android 生态的依赖都在我这，然后我没了",
     "killedBy": "JFrog",
     "dependents": "几乎所有 Android 项目、Java 库",
-    "tags": ["java", "android", "包管理"],
-    "flowers": 18900
+    "tags": [
+      "java",
+      "android",
+      "包管理"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-domains",
@@ -304,8 +379,11 @@
     "epitaph": "连域名生意都做不下去，服了",
     "killedBy": "Google",
     "dependents": "1000万+ 域名持有者",
-    "tags": ["google", "域名"],
-    "flowers": 11200
+    "tags": [
+      "google",
+      "域名"
+    ],
+    "flowers": 0
   },
   {
     "id": "itunes-xml",
@@ -318,8 +396,11 @@
     "epitaph": "一个时代的结束，1000首歌在你口袋里，现在在云里",
     "killedBy": "Apple",
     "dependents": "DJ 软件、音乐管理工具、播放列表同步",
-    "tags": ["apple", "音乐"],
-    "flowers": 7650
+    "tags": [
+      "apple",
+      "音乐"
+    ],
+    "flowers": 0
   },
   {
     "id": "openai-codex-api",
@@ -332,8 +413,11 @@
     "epitaph": "AI 编程的开端，被自己的后代取代",
     "killedBy": "OpenAI",
     "dependents": "GitHub Copilot 早期版本、代码生成工具",
-    "tags": ["ai", "编程"],
-    "flowers": 9430
+    "tags": [
+      "ai",
+      "编程"
+    ],
+    "flowers": 0
   },
   {
     "id": "flash-actionscript",
@@ -346,8 +430,12 @@
     "epitaph": "整个互联网的童年，死于时代的进步",
     "killedBy": "Adobe / 浏览器联盟",
     "dependents": "无数 Flash 游戏、动画网站、视频播放器",
-    "tags": ["adobe", "浏览器", "经典"],
-    "flowers": 52000
+    "tags": [
+      "adobe",
+      "浏览器",
+      "经典"
+    ],
+    "flowers": 0
   },
   {
     "id": "picasa-api",
@@ -360,8 +448,11 @@
     "epitaph": "曾经最好的照片管理工具，死于亲兄弟",
     "killedBy": "Google",
     "dependents": "Picasa 桌面用户、第三方相册集成",
-    "tags": ["google", "摄影"],
-    "flowers": 4800
+    "tags": [
+      "google",
+      "摄影"
+    ],
+    "flowers": 0
   },
   {
     "id": "windows-phone",
@@ -374,8 +465,11 @@
     "epitaph": "磁贴设计很美，但没人买单",
     "killedBy": "Microsoft",
     "dependents": "Windows Phone 应用开发者、Nokia Lumia 用户",
-    "tags": ["microsoft", "移动端"],
-    "flowers": 8900
+    "tags": [
+      "microsoft",
+      "移动端"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-translate-free",
@@ -388,8 +482,12 @@
     "epitaph": "免费翻译的黄金时代，一去不复返",
     "killedBy": "Google",
     "dependents": "无数翻译插件、多语言网站",
-    "tags": ["google", "翻译", "免费"],
-    "flowers": 11500
+    "tags": [
+      "google",
+      "翻译",
+      "免费"
+    ],
+    "flowers": 0
   },
   {
     "id": "hipchat",
@@ -402,8 +500,11 @@
     "epitaph": "被收购两次，死了两次",
     "killedBy": "Atlassian",
     "dependents": "企业聊天集成、DevOps 通知机器人",
-    "tags": ["atlassian", "通讯"],
-    "flowers": 3200
+    "tags": [
+      "atlassian",
+      "通讯"
+    ],
+    "flowers": 0
   },
   {
     "id": "yahoo-directory",
@@ -416,8 +517,12 @@
     "epitaph": "互联网的第一本黄页，死于搜索引擎",
     "killedBy": "Yahoo",
     "dependents": "早期互联网用户、SEO 从业者",
-    "tags": ["yahoo", "搜索", "先驱"],
-    "flowers": 5600
+    "tags": [
+      "yahoo",
+      "搜索",
+      "先驱"
+    ],
+    "flowers": 0
   },
   {
     "id": "delicious-api",
@@ -430,8 +535,12 @@
     "epitaph": "社交书签的鼻祖，死于无人接盘",
     "killedBy": "多次转手",
     "dependents": "书签管理工具、社交分享应用",
-    "tags": ["社交", "书签", "先驱"],
-    "flowers": 4100
+    "tags": [
+      "社交",
+      "书签",
+      "先驱"
+    ],
+    "flowers": 0
   },
   {
     "id": "cortana-skills",
@@ -444,8 +553,12 @@
     "epitaph": "Hey Cortana... 再见 Cortana",
     "killedBy": "Microsoft",
     "dependents": "Cortana 技能开发者、智能家居集成",
-    "tags": ["microsoft", "ai", "语音"],
-    "flowers": 2100
+    "tags": [
+      "microsoft",
+      "ai",
+      "语音"
+    ],
+    "flowers": 0
   },
   {
     "id": "amazon-drive-api",
@@ -458,8 +571,11 @@
     "epitaph": "连亚马逊自己都不想做云盘了",
     "killedBy": "Amazon",
     "dependents": "第三方备份工具、文件同步应用",
-    "tags": ["amazon", "存储"],
-    "flowers": 3400
+    "tags": [
+      "amazon",
+      "存储"
+    ],
+    "flowers": 0
   },
   {
     "id": "bitbucket-mercurial",
@@ -472,8 +588,11 @@
     "epitaph": "Git vs Mercurial，胜者通吃",
     "killedBy": "Atlassian",
     "dependents": "Mercurial 项目、Python 社区（CPython 曾用 Hg）",
-    "tags": ["atlassian", "版本控制"],
-    "flowers": 4700
+    "tags": [
+      "atlassian",
+      "版本控制"
+    ],
+    "flowers": 0
   },
   {
     "id": "windows-gadgets",
@@ -486,8 +605,11 @@
     "epitaph": "桌面小组件的先驱，死于安全问题",
     "killedBy": "Microsoft",
     "dependents": "Windows Vista/7 桌面小工具开发者",
-    "tags": ["microsoft", "桌面"],
-    "flowers": 3800
+    "tags": [
+      "microsoft",
+      "桌面"
+    ],
+    "flowers": 0
   },
   {
     "id": "foursquare-api-v2",
@@ -500,8 +622,12 @@
     "epitaph": "签到文化的缔造者，死于商业化转型",
     "killedBy": "Foursquare",
     "dependents": "LBS 应用、签到类社交产品",
-    "tags": ["社交", "地图", "免费"],
-    "flowers": 5200
+    "tags": [
+      "社交",
+      "地图",
+      "免费"
+    ],
+    "flowers": 0
   },
   {
     "id": "ifttt-free",
@@ -514,8 +640,12 @@
     "epitaph": "自动化的民主化，死于付费墙",
     "killedBy": "IFTTT",
     "dependents": "智能家居用户、自动化工作流",
-    "tags": ["自动化", "免费", "iot"],
-    "flowers": 7800
+    "tags": [
+      "自动化",
+      "免费",
+      "iot"
+    ],
+    "flowers": 0
   },
   {
     "id": "google-fit-rest",
@@ -528,8 +658,12 @@
     "epitaph": "健康数据的开放梦，又碎了",
     "killedBy": "Google",
     "dependents": "健身应用、健康数据分析工具",
-    "tags": ["google", "健康", "移动端"],
-    "flowers": 4300
+    "tags": [
+      "google",
+      "健康",
+      "移动端"
+    ],
+    "flowers": 0
   },
   {
     "id": "ubuntu-touch",
@@ -542,8 +676,11 @@
     "epitaph": "Linux 手机的梦，醒了",
     "killedBy": "Canonical",
     "dependents": "Ubuntu Phone 开发者、Unity 桌面用户",
-    "tags": ["linux", "移动端"],
-    "flowers": 3600
+    "tags": [
+      "linux",
+      "移动端"
+    ],
+    "flowers": 0
   },
   {
     "id": "tumblr-legacy-api",
@@ -556,7 +693,10 @@
     "epitaph": "博客平台的叛逆少年，长大后迷失了自己",
     "killedBy": "Tumblr / Yahoo / Verizon",
     "dependents": "Tumblr 第三方客户端、博客迁移工具",
-    "tags": ["社交", "博客"],
-    "flowers": 2900
+    "tags": [
+      "社交",
+      "博客"
+    ],
+    "flowers": 0
   }
 ]
