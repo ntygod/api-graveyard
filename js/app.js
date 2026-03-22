@@ -399,7 +399,6 @@
       <div class="modal-actions">
         <button class="btn btn-flower" id="modal-flower-btn">${t.flower} (${formatNumber(api.flowers)})</button>
         <button class="btn btn-share" id="modal-share-btn">${t.shareImage}</button>
-        <button class="btn btn-share" id="modal-copy-btn">${t.copyShare}</button>
       </div>
     `;
     document.getElementById('modal-flower-btn').addEventListener('click', (e) => {
@@ -416,13 +415,6 @@
     });
     document.getElementById('modal-share-btn').addEventListener('click', () => {
       generateShareCard(api);
-    });
-    document.getElementById('modal-copy-btn').addEventListener('click', () => {
-      navigator.clipboard.writeText(t.shareTemplate(api)).then(() => {
-        showToast(t.copiedToast);
-      }).catch(() => {
-        showToast(t.copyFailToast);
-      });
     });
     history.replaceState(null, '', `#/api/${api.id}`);
     $modalOverlay.classList.add('active');
@@ -532,15 +524,23 @@
     ctx.fillStyle = '#3a3a4a';
     ctx.fillText('R.I.P.', W / 2, stoneY + stoneH - 15);
 
-    // 下载
-    canvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `rip-${api.id}.png`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast(t.shareImageToast);
+    // 复制到剪贴板，失败则下载
+    canvas.toBlob(async (blob) => {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]);
+        showToast(t.copiedToast);
+      } catch {
+        // 剪贴板不支持图片，fallback 下载
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `rip-${api.id}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(t.shareImageToast);
+      }
     });
   }
 
