@@ -1,0 +1,679 @@
+/* ========== 基础重置与变量 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #13131a;
+  --bg-card-hover: #1a1a25;
+  --text: #c8c8d0;
+  --text-dim: #6a6a7a;
+  --text-bright: #e8e8f0;
+  --accent: #7c6f9b;
+  --accent-glow: #9b8fc4;
+  --green: #4a7a5a;
+  --red: #8a4a4a;
+  --gold: #b8a060;
+  --border: #2a2a35;
+  --flower-color: #d4456a;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ========== 雾气动画背景 ========== */
+.fog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(100, 80, 140, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(60, 80, 120, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(80, 60, 100, 0.04) 0%, transparent 50%);
+  animation: fogDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes fogDrift {
+  0% { opacity: 0.6; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(10px); }
+}
+
+/* ========== Header ========== */
+header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: var(--text-bright);
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 40px rgba(124, 111, 155, 0.3);
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 16px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  font-family: var(--font-mono);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ========== 控制栏 ========== */
+.controls {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-bright);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+  border-color: var(--accent);
+}
+
+.search-box input::placeholder {
+  color: var(--text-dim);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.sort-options select {
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ========== 墓地网格 ========== */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.graveyard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ========== 墓碑卡片 ========== */
+.tombstone {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px 16px 4px 4px;
+  padding: 28px 24px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tombstone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tombstone:hover {
+  transform: translateY(-4px);
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(124, 111, 155, 0.15);
+}
+
+.tombstone:hover::before {
+  opacity: 1;
+}
+
+.tombstone-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.tombstone-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+
+.tombstone-dates {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.tombstone-epitaph {
+  font-style: italic;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  min-height: 40px;
+}
+
+.tombstone-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.tombstone-killer {
+  font-size: 0.8rem;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tombstone-flowers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--flower-color);
+}
+
+.flower-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: var(--flower-color);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.flower-btn:hover {
+  background: rgba(212, 69, 106, 0.15);
+  border-color: var(--flower-color);
+  transform: scale(1.05);
+}
+
+.flower-btn.flowered {
+  background: rgba(212, 69, 106, 0.2);
+  border-color: var(--flower-color);
+}
+
+/* 献花动画 */
+.flower-float {
+  position: fixed;
+  font-size: 1.5rem;
+  pointer-events: none;
+  z-index: 1000;
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(1.5); }
+}
+
+/* ========== 杀手排行榜 ========== */
+.killer-board {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.killer-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.3s;
+}
+
+.killer-item:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+}
+
+.killer-rank {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  font-family: var(--font-mono);
+  min-width: 50px;
+  text-align: center;
+}
+
+.killer-rank.gold { color: #ffd700; }
+.killer-rank.silver { color: #c0c0c0; }
+.killer-rank.bronze { color: #cd7f32; }
+
+.killer-info {
+  flex: 1;
+}
+
+.killer-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.killer-count {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.killer-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.killer-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--flower-color));
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+.killer-victims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.victim-tag {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  background: rgba(138, 74, 74, 0.2);
+  border-radius: 4px;
+  color: var(--text-dim);
+}
+
+/* ========== 弹窗 ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  max-width: 560px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: var(--text-bright);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.modal-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.modal-dates {
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.modal-section {
+  margin-bottom: 18px;
+}
+
+.modal-section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.modal-section-content {
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.modal-epitaph {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent-glow);
+  text-align: center;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 20px 0;
+  background: rgba(124, 111, 155, 0.05);
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.tag {
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  background: rgba(124, 111, 155, 0.15);
+  border-radius: 4px;
+  color: var(--accent-glow);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+}
+
+.btn-flower {
+  border-color: var(--flower-color);
+  color: var(--flower-color);
+}
+
+.btn-flower:hover {
+  background: rgba(212, 69, 106, 0.15);
+}
+
+.btn-share {
+  border-color: var(--accent);
+  color: var(--accent-glow);
+}
+
+/* ========== 隐藏工具类 ========== */
+.hidden {
+  display: none !important;
+}
+
+/* ========== Footer ========== */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--accent-glow);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-note {
+  margin-top: 8px;
+  font-size: 0.8rem;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .stats {
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+
+  .graveyard {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 24px;
+  }
+}
+
+/* ========== 入场动画 ========== */
+.tombstone {
+  animation: riseUp 0.5s ease backwards;
+}
+
+@keyframes riseUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Toast 提示 ========== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  color: var(--text-bright);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
